@@ -1,0 +1,47 @@
+{# vim:set ai et fenc=utf-8 ff=unix sw=4 syntax=django ts=4: #}
+{% extends "base.html" %}
+
+{% block pagecss %}
+{% endblock %}
+
+{% block menu_h %}menu_on{% endblock %}
+
+{% block body %}
+
+{% if form.errors %}
+{{ form.errors }}
+{% endif %}
+
+<form method="post" action="{% url fmorales.usuarios.views.creacion %}">
+    {% csrf_token %}
+    <ul>
+        <li>
+            {{ usuario_form.username.label_tag }}
+            {{ usuario_form.username }}
+        </li>
+        <li>
+            {{ usuario_form.password1.label_tag }}
+            {{ usuario_form.password1 }}
+        </li>
+        <li>
+            {{ usuario_form.password2.label_tag }}
+            {{ usuario_form.password2 }}
+        </li>
+        <li>
+            {{ usuario_form.tel.label_tag }}
+            {{ usuario_form.tel }}
+        </li>
+        <li>
+            {{ usuario_form.email1.label_tag }}
+            {{ usuario_form.email1 }}
+        </li>
+        <li>
+            {{ usuario_form.email2.label_tag }}
+            {{ usuario_form.email2 }}
+        </li>
+    </ul>
+    <input type="submit" value="creacion" />
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{% endblock %}

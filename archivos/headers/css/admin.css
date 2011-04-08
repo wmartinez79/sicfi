@@ -1,0 +1,25 @@
+/* CSS styles for admin services */
+
+.instruction {
+  border:1px solid #d0d0d0;
+  padding:10px;
+  margin:10px;
+}
+
+div.h3 { font-size:14px; }
+
+.textile { margin-left:105px; }
+.textile th { border:1px solid #e0e0e0; }
+.textile td { border:1px solid #e0e0e0; }
+.textile blockquote {border:0px; margin:1.5em;color:#666;font-style:italic;}
+.textile li { margin:0;padding:0; }
+.textile ul, .textile ol,
+.textile td ul, .textile td ol { 
+  margin:0 1.5em 1.5em 0;
+  padding-left:3.333em;
+}
+.textile ul {list-style-type:disc;}
+.textile ol {list-style-type:decimal;}
+.textile .h2 {color:#111; font-size:2em;margin-bottom:0.75em;}
+.textile .h3 {color:#111; font-size:1.5em;line-height:1;margin-bottom:1em;}
+

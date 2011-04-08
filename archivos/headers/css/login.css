@@ -1,0 +1,9 @@
+#login_form form { margin-top:20px; padding-left:20px; }
+#login_form input[type=text] { width:100px; }
+#login_form input[type=password] { width:100px; }
+#login_submit_id { margin-left:10px; }
+#login_form a { font-size:13px; }
+#login_form label {
+  font-weight:normal; width:80px; float:left; padding-top:4px;
+}
+

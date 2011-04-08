@@ -1,0 +1,27 @@
+/* CSS rules for index page */
+
+#index_image { margin-top:10px; }
+.index_hl_nav {
+  line-height:1.2; font-family:verdana;
+  margin-top:40px; padding-left:30px;
+}
+.index_hl_nav img { float:left; margin:0px 10px 40px 30px; }
+.index_hl_nav h2 a { color:#0768A9; text-decoration:none; }
+.index_hl_nav .red { color:red; }
+
+#index_nav { margin-top:20px; }
+.index_nav_sec {
+  border-top:1px solid #c0c0c0; padding-top:10px; line-height:1.2; 
+}
+.index_links { font-size:14px; line-height:1.4; }
+.index_links a { color:black; text-decoration:none; }
+.index_links a:hover { color:#1414ef; text-decoration:underline; }
+.awards { float:right; margin:0px 20px 15px 15px; }
+
+#index_footer {
+  background:#f6f3ec; border-top:1px solid #c0c0c0;
+  margin-top:20px;
+}
+#index_banner { padding-top:20px; line-height:1.3; }
+
+

@@ -1,0 +1,41 @@
+{# vim:set ai et fenc=utf-8 ff=unix sw=4 syntax=html ts=4: #}
+{% extends "base.html" %}
+
+{% block pagecss %}
+<link href="/headers/css/login.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block menu_h %}menu_on{% endblock %}
+
+{% block body %}
+
+{% if form.errors %}
+<p>El usuario y password ingresado es incorrecto. Por favor intentelo de nuevo.</p>
+{% endif %}
+
+<h3>Usuarios existentes</h3>
+
+<p>
+Ingrese su usuario y password para ingresar.
+</p>
+
+<form id="login_form"
+ method="post" action="{% url fmorales.usuarios.views.login %}">
+    <p>
+    {% csrf_token %}
+    {{ form.username.label_tag }} {{ form.username }}
+    <br/>
+    {{ form.password.label_tag }} {{ form.password }}
+    </p>
+    <p>
+    <input type="submit" value="Login to SICFI" id="login_submit_id" />
+    <input type="hidden" name="next" value="{{ next }}" />
+    </p>
+</form>
+
+<p>
+Olvido su usuario o password? Click <a
+href="/login/forgot">aqui</a>.
+</p>
+
+{% endblock %}

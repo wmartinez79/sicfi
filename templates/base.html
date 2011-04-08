@@ -12,17 +12,17 @@
           content="text/html;charset=utf-8"/>
         <title>{% block title %}SCIFI: Sistema de Control de Facturación e Inventario{% endblock %}</title>
         <link rel="stylesheet"
-            href="/headers/blueprint/screen.css"
+            href="headers/blueprint/screen.css"
             type="text/css" media="screen,projection" />
         <link rel="stylesheet"
-            href="/headers/blueprint/print.css"
+            href="headers/blueprint/print.css"
             type="text/css" media="print" />
-        <link href="/headers/css/addgene.css"
+        <link href="headers/css/sicfi.css"
             rel="stylesheet" type="text/css" />
         <script type="text/javascript"
                 src="http://code.jquery.com/jquery-1.4.2.min.js">
         </script>
-        <script type="text/javascript" src="/headers/js/scifi.js">
+        <script type="text/javascript" src="headers/js/scifi.js">
         </script>
         {% block pagejs %}{% endblock %}
         {% block pagecss %}{% endblock %}
@@ -31,7 +31,7 @@
     <div class="container" id="container_top">
       <div class="span-24 last" id="container_main">
         <div class="span-24 last" id="header">
-          <a href="/"><img src="/images/scifi.gif" id="logo"></a>
+          <a href="/"><img src="images/scifi.gif" id="logo"></a>
 
           <form action="/search" method="get">
             {% if user.is_authenticated %}
@@ -48,57 +48,51 @@
             {% endif %}
             <br/>
          </form>
-
         </div>
         <div class="span-24 last" id="index_menu">
-          <div class="menu_btn {% block menu_d %}menu_off{% endblock %}"
+          <div class="menu_btn {% block menu_a %}menu_off{% endblock %}"
                id="menu_archivos"
                target="/archivos/menu">
             <a href="#">Archivos</a>
           </div>
           <div class="menu_sep"><img src="/images/spacer.gif"></div>
-          <div class="menu_btn {% block menu_r %}menu_off{% endblock %}"
+          <div class="menu_btn {% block menu_b %}menu_off{% endblock %}"
                id="menu_clientes"
                target="/clientes/menu">
             <a href="#">Clientes</a>
           </div>
           <div class="menu_sep"><img src="/images/spacer.gif"></div>
-          <div class="menu_btn {% block menu_t %}menu_off{% endblock %}"
+          <div class="menu_btn {% block menu_c %}menu_off{% endblock %}"
                id="menu_llamadas"
                target="/llamadas/menu">
             <a href="#">Llamadas</a>
           </div>
           <div class="menu_sep"><img src="/images/spacer.gif"></div>
-          <div class="menu_btn {% block menu_a %}menu_off{% endblock %} last"
+          <div class="menu_btn {% block menu_d %}menu_off{% endblock %} last"
                id="menu_inventario"
                target="/inventario/menu">
             <a href="#">Inventario</a>
           </div>
 		  <div class="menu_sep"><img src="/images/spacer.gif"></div>
-          <div class="menu_btn {% block menu_a %}menu_off{% endblock %} last"
+          <div class="menu_btn {% block menu_e %}menu_off{% endblock %} last"
                id="menu_proformas"
                target="/proformas/menu">
             <a href="#">Proformas</a>
           </div>
 		  <div class="menu_sep"><img src="/images/spacer.gif"></div>
-          <div class="menu_btn {% block menu_a %}menu_off{% endblock %} last"
-               id="menu_facturas"
-               target="/facturacion/menu">
-            <a href="#">Proformas</a>
-          </div>
-		  <div class="menu_sep"><img src="/images/spacer.gif"></div>
-          <div class="menu_btn {% block menu_a %}menu_off{% endblock %} last"
+          <div class="menu_btn {% block menu_f %}menu_off{% endblock %} last"
                id="menu_cxc"
                target="/cxc/menu">
             <a href="#">Cuentas por Cobrar</a>
           </div>
 		  <div class="menu_sep"><img src="/images/spacer.gif"></div>
-          <div class="menu_btn {% block menu_a %}menu_off{% endblock %} last"
+          <div class="menu_btn {% block menu_g %}menu_off{% endblock %} last"
                id="menu_ayuda"
                target="/ayuda/menu">
             <a href="#">Ayuda</a>
           </div>
         </div>
+
         <div class="span-24 last" id="container_body"> {# body #}
           <div class="span-23 last" id="error_message">
             {% block error_message %}{% endblock %}

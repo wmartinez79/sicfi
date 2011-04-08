@@ -7,12 +7,12 @@ class Permiso(models.Model):
     Los estados deben estar representados en una clase aparte, ojo, se
     podria crear en los modelos de los catalogos
     """
-    ESTADOS = (
+    PERMISO_ESTADOS = (
         ('A','Activo'),
         ('I','Inactivo')
     )
     nombre = models.CharField(max_length= 64)
-    estado = models.CharField(max_length = 2, choices=ESTADOS)
+    estado = models.CharField(max_length = 2, choices=PERMISO_ESTADOS)
     fecha_crea = models.DateTimeField(auto_now_add=True)
     fecha_modi = models.DateTimeField(auto_now = True)
 

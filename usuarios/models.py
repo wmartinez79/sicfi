@@ -20,8 +20,12 @@ class Permiso(models.Model):
         return u'%s' % (self.nombre)
 
 class Rol(models.Model):
+    ROL_ESTADOS = (
+        ('A','Activo'),
+        ('I','Inactivo')
+    )
     nombre = models.CharField(max_length= 64)
-    estado = models.CharField(max_length = 2, choices=ESTADOS)
+    estado = models.CharField(max_length = 2, choices=ROL_ESTADOS)
     fecha_crea = models.DateTimeField(auto_now_add=True)
     fecha_modi = models.DateTimeField(auto_now = True)
     def __unicode__(self):

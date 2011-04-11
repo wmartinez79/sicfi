@@ -1,8 +1,14 @@
 from django.db import models
 
-class estado(models.Model):
+class Estado(models.Model):
     descripcion = models.CharField(max_length = 64)
 
-class tipo_cliente(models.Model):
+    def __unicode__(self):
+        return u'%s' % (self.descripcion)
+
+class Tipo_Cliente(models.Model):
     descripcion = models.CharField(max_length = 64)
-    estado = models.ForeignKey(estado)
+    estado = models.ForeignKey(Estado)
+
+    def __unicode__(self):
+        return u'%s' % (self.descripcion)

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block menu_h %}menu_on{% endblock %}
+
+{% block body %}
+<form method="post" action="{% url sicfi.catalogos.views.estado_new %}">
+{% csrf_token %}
+    <ul>
+        <li>
+            {{ estado_form.descripcion.label_tag }}
+            {{ estado_form.descripcion }}
+        </li>
+	</ul>
+	<input type="submit" value="creacion" />
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+<h2>Estados</h2>
+{% if estados %}
+	<table>
+		<thead>
+			<th colspan= 2 align= right>Id</th>
+			<th>Descripción</th>
+		</thead>
+	{% for estado in estados %}
+	<tr>
+		<td><a href="/catalogos/estado/{{estado.id}}">Editar</a></td>
+		<td>{{estado.id}}</td>
+		<td>{{estado.descripcion}}</td>
+	</tr>
+	{% endfor %}
+	</table>
+{% else %}
+	<p> No se ha definido ningun estado</p>
+{% endif %}
+{% endblock %}

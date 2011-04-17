@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block pagecss %}
+<link href="headers/css/index.css" rel="stylesheet" type="text/css" />
+<link href="headers/css/login.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block menu_h %}menu_on{% endblock %}
+
+{% block body %}
+
+<div class="span-23 last" id="index">
+
+  <div class="span-8 index_archivo_sec" id="archivo_links">
+    <h3>Archivo</h3>
+	<h4> Administración </h4>
+	<p class="index_links">
+
+    <img src="images/redabtn.jpg" />
+	<a href="/administra/crear_usuario">Crear Usuario</a>
+    <br/>
+
+	<img src="images/redabtn.jpg" />
+    <a href="/administra/password">Cambiar Contraseña</a>
+    <br/>
+
+	<img src="images/redabtn.jpg" />
+    <a href="/administra/roles">Crear Roles</a>
+    <br/>
+
+	<img src="images/redabtn.jpg" />
+	<a href="/administra/permisos">Crear Permisos</a>
+    <br/>
+
+	<img src="images/redabtn.jpg" />
+	<a href="/administra/permisos_esp">Crear Permisos Especiales</a>
+    <br/>
+	</p>
+
+	<h4> Configuración </h4>
+	<p class="index_links">
+    <img src="images/redabtn.jpg" />
+	<a href="/config/empresa">Empresa</a>
+    <br/>
+
+    <img src="images/redabtn.jpg" />
+    <a href="/config/tipo_cambio_ofi">Tipo de cambio oficial</a>
+    <br/>
+
+    <img src="/images/redabtn.jpg" />
+    <a href="/config/tipo_cambio_vent">Tipo de cambio de venta</a>
+    <br/>
+	</p>
+  </div>
+
+  <div class="span-8 index_clientes_sec" id="clientes_link">
+
+    <h3>Clientes</h3>
+	<h4>Procesos</h4>
+    <p class="index_links">
+
+    <img src="/images/redabtn.jpg" />
+    <a href="/clientes/crear">Crear Cliente</a> <br/>
+
+    <img src="/images/redabtn.jpg" />
+    <a href="/clientes/buscar">Buscar Cliente</a> <br/>
+
+    </p>
+	<h4>Catalogos</h4>
+    <p class="index_links">
+
+    <img src="/images/redabtn.jpg" />
+    <a href="/catalogos/listar_tclientes">Tipos de Cliente</a> <br/>
+
+    <img src="/images/redabtn.jpg" />
+    <a href="/catalogos/tipo_documento">Tipos de Documento</a> <br/>
+
+	<img src="/images/redabtn.jpg" />
+    <a href="/catalogos/tipo_direccion">Tipos de Dirección</a> <br/>
+
+    <img src="/images/redabtn.jpg" />
+    <a href="/catalogos/tipo_telefono">Tipos de Teléfono</a> <br/>
+
+    <img src="/images/redabtn.jpg" />
+    <a href="/catalogos/pais">País</a> <br/>
+
+    <img src="/images/redabtn.jpg" />
+    <a href="/catalogos/departamentos">Departamentos</a> <br/>
+
+    <img src="/images/redabtn.jpg" />
+    <a href="/catalogos/municipios">Municipios</a> <br/>
+
+    <img src="/images/redabtn.jpg" />
+    <a href="/catalogos/listar_estados">Estados</a> <br/>
+
+    </p>
+
+  </div>
+</div> {# index_nav #}
+{% endblock %}

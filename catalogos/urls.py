@@ -14,4 +14,8 @@ urlpatterns = patterns('',
     (r'^/?listar_paises/?$', 'sicfi.catalogos.views.listar_paises'),
     (r'^/?borrar_pais/?$', 'sicfi.catalogos.views.delete_pais'),
     (r'^/?guardar_pais/?$', 'sicfi.catalogos.views.guardar_pais'),
+    (r'^/?tdocumento/(\d+)?$', 'sicfi.catalogos.views.view_tdocumento'),
+    (r'^/?listar_tdocumento/?$', 'sicfi.catalogos.views.listar_tdocumento'),
+    (r'^/?borrar_tdocumento/?$', 'sicfi.catalogos.views.delete_tdocumento'),
+    (r'^/?guardar_tdocumento/?$', 'sicfi.catalogos.views.guardar_tdocumento'),
 )

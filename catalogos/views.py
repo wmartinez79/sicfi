@@ -1,7 +1,7 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, HttpResponseRedirect
-from sicfi.catalogos.models import Estado, Tipo_Cliente, Pais
-from sicfi.catalogos.forms import EstadoForm, TipoClienteForm, PaisForm
+from sicfi.catalogos.models import Estado, Tipo_Cliente, Pais, Tipo_Documento
+from sicfi.catalogos.forms import EstadoForm, TipoClienteForm, PaisForm, TipoDocumentoForm
 
 def listar_estados(request):
     estados = Estado.objects.all().order_by('id')
@@ -148,7 +148,7 @@ def delete_tcliente(request):
         tclient_id = request.POST['tclient']
         tclient = get_object_or_404(Tipo_Cliente, pk = tclient_id)
         tclient.delete()
-        return HttpResponseRedirect('/catalogos/listar_tclientes/')
+        return HttpResponseRedirect('/catalogos/listar_tcliente/')
 
     else:
         mensaje_error = 'la Informacion del Pais a eliminar es incorrecta'
@@ -237,6 +237,86 @@ def delete_pais(request):
             'catalogos/pais.html',
             {'pais_form' : pais_form,
              'paises': paises,
+             'mensaje_error' : mensaje_error
+            },
+            context_instance=RequestContext(request)
+        )
+
+def listar_tdocumento(request):
+    tdocumentos = Tipo_Documento.objects.all().order_by('id')
+    print tdocumentos
+    tdocumento_form = TipoDocumentoForm()
+
+    return render_to_response(
+        'catalogos/tipo_documento.html',
+        {'tdocumento_form' : tdocumento_form,
+         'tdocumentos': tdocumentos,
+        },
+        context_instance=RequestContext(request)
+    )
+
+def view_tdocumento(request,id):
+    tdocumentos = Tipo_Documento.objects.all().order_by('id')
+    tdocumento = get_object_or_404(Tipo_Documento, pk = id)
+    tdocumento_form = TipoDocumentoForm(instance=tdocumento)
+
+    return render_to_response(
+        'catalogos/tipo_documento.html',
+        {'tdocumento_form' : tdocumento_form,
+         'tdocumentos': tdocumentos,
+         'tdocumento': tdocumento
+        },
+        context_instance=RequestContext(request)
+    )
+
+def guardar_tdocumento(request):
+    tdocumentos = Tipo_Documento.objects.all().order_by('id')
+
+    if 'tdocumento' in request.POST:
+        tdocumento_id = request.POST['tdocumento']
+        tdocumento = get_object_or_404(Tipo_Documento, pk = tdocumento_id)
+        tdocumento_form = TipoDocumentoForm(request.POST, instance=tdocumento)
+    else:
+        tdocumento_form = TipoDocumentoForm(request.POST)
+    print tdocumento_form
+    if tdocumento_form.is_valid():
+        status = tdocumento_form.save()
+
+        return render_to_response(
+            'catalogos/tipo_documento.html',
+            {'tdocumento_form' : tdocumento_form,
+             'tdocumentos': tdocumentos,
+             'tdocumento': tdocumento
+            },
+            context_instance=RequestContext(request)
+        )
+    else:
+        mensaje_error = 'Error al guardar la informacion del Tipo de Documento'
+        return render_to_response(
+            'catalogos/tipo_documento.html',
+            {'tdocumento_form' : tdocumento_form,
+             'tdocumentos': tdocumentos,
+             'mensaje_error' : mensaje_error
+            },
+            context_instance=RequestContext(request)
+        )
+
+def delete_tdocumento(request):
+    tdocumentos = Tipo_Documento.objects.all().order_by('id')
+    tdocumento_form = TipoDocumentoForm(request.POST)
+    if 'tdocumento' in request.POST:
+        tdocumento_id = request.POST['tdocumento']
+        tdocumento = get_object_or_404(Tipo_Documento, pk = tdocumento_id)
+        tdocumento.delete()
+        return HttpResponseRedirect('/catalogos/listar_tdocumento/')
+
+    else:
+        mensaje_error = 'la Informacion del tipo de documento a eliminar es incorrecta'
+
+        return render_to_response(
+            'catalogos/tipo_documento.html',
+            {'documento_form' : tdocumento_form,
+             'tdocumentos': tdocumentos,
              'mensaje_error' : mensaje_error
             },
             context_instance=RequestContext(request)

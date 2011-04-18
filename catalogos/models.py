@@ -42,3 +42,12 @@ class Departamento(models.Model):
 
     def get_absolute_url(self):
         return "/catalogos/departamento/%i" % self.id
+
+class Tipo_Documento(models.Model):
+    descripcion = models.CharField(max_length = 64)
+
+    def __unicode__(self):
+        return u'%s' % (self.descripcion)
+
+    def get_absolute_url(self):
+        return "/catalogos/tdocumento/%i" % self.id

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block menu_h %}menu_on{% endblock %}
+
+{% block body %}
+  {% if mensaje_error %}
+    <h3><b>{{ mensaje_error }}</b></h3>
+	{% if municipio_form.errors %}
+		<h4><b>{{ municipio_form.errors }}</b></h4>
+	{% endif %}
+  {% endif %}
+  {% if muni %}
+  	<h3>Editar</h3>
+  {% else %}
+  	<h3>Agregar Nuevo</h3>
+  {% endif %}
+ <table  width="70%" cellspacing="0" cellpadding="1">
+ 	<form method="post" action="{% url sicfi.catalogos.views.guardar_municipio %}">
+  	<tr>
+		{% if muni %}
+			<td>ID:</td>
+			<td>{{ muni.id }}</td>
+		{% endif %}
+	</tr>
+	<tr>
+	{% for field in municipio_form %}
+        <tr>
+            <td>{{ field.label_tag }}</td> <td>{{ field }}</td>
+        </tr>
+	{% endfor %}
+	</tr>
+ </table>
+ <p></p>
+ <table>
+ 	<tr>
+ 		<td>
+				{% csrf_token %}
+				<input type="submit" value="Guardar" />
+			    <input type="hidden" name="next" value="{{ next }}" />
+				{% if muni %}
+					<input type="hidden" id="muni_id" name="muni" value="{{ muni.id }}"/>
+				{% endif %}
+			</form>
+		</td>
+		{% if muni %}
+			<td>
+				<form method ="post" action = "{% url sicfi.catalogos.views.delete_municipio %}">
+				  {% csrf_token %}
+					<input type="submit" value="Borrar">
+					<input type="hidden" id="muni_id" name="muni" value="{{ muni.id }}"/>
+				</form>
+			</td>
+			<td>
+				<form method ="post" action = "{% url sicfi.catalogos.views.listar_municipios %}">
+				  {% csrf_token %}
+					<input type="submit" value="Limpiar">
+				</form>
+			</td>
+		{% endif %}
+   </tr>
+ </table>
+<h2>municipios</h2>
+{% if municipios %}
+	<table width="100%" cellspacing="0" cellpadding="1">
+		<tr>
+			<td> </td>
+			<td><strong>Id</strong></td>
+			<td><strong>Descripción</strong></td>
+			<td><strong>Estado</strong></td>
+		</tr>
+		{% for municipio in municipios %}
+		<tr>
+			<td><a class ="BLUELINK" href="{{municipio.get_absolute_url}}">Editar</a></td>
+			<td>{{municipio.id}}</td>
+			<td>{{municipio.nombre}}</td>
+			<td>{{municipio.pais}}</td>
+			<td>{{municipio.estado}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+{% else %}
+	<p> No se ha definido ningun municipio</p>
+{% endif %}
+{% endblock %}

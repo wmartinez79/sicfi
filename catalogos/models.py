@@ -1,4 +1,6 @@
 from django.db import models
+from sicfi.smart_selects.db_fields import ChainedForeignKey
+
 
 class Estado(models.Model):
     descripcion = models.CharField(max_length = 64)
@@ -38,7 +40,25 @@ class Departamento(models.Model):
     estado = models.ForeignKey(Estado)
 
     def __unicode__(self):
-        return u'%s' % (self.nombre)
+        return u'%s' % (self.nombre + ' de '+ self.pais)
 
     def get_absolute_url(self):
         return "/catalogos/departamento/%i" % self.id
+
+class Municipio(models.Model):
+    nombre = models.CharField(max_length = 64)
+    pais   = models.ForeignKey(Pais)
+    departamento = ChainedForeignKey(
+        Departamento,
+        chained_field="pais",
+        chained_model_field="pais",
+        show_all=False,
+        auto_choose=True
+    )
+    estado = models.ForeignKey(Estado)
+
+    def __unicode__(self):
+        return u'%s' % (self.nombre)
+
+    def get_absolute_url(self):
+        return "/catalogos/municipio/%i" % self.id

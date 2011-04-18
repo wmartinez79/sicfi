@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block menu_h %}menu_on{% endblock %}
+
+{% block body %}
+  {% if mensaje_error %}
+    <h3><b>{{ mensaje_error }}</b></h3>
+	{% if departamento_form.errors %}
+		<h4><b>{{ departamento_form.errors }}</b></h4>
+	{% endif %}
+  {% endif %}
+  {% if depa %}
+  	<h3>Editar</h3>
+  {% else %}
+  	<h3>Agregar Nuevo</h3>
+  {% endif %}
+ <table  width="70%" cellspacing="0" cellpadding="1">
+ 	<form method="post" action="{% url sicfi.catalogos.views.guardar_departamento %}">
+  	<tr>
+		{% if depa %}
+			<td>ID:</td>
+			<td>{{ depa.id }}</td>
+		{% endif %}
+	</tr>
+	<tr>
+	{% for field in departamento_form %}
+        <tr>
+            <td>{{ field.label_tag }}</td> <td>{{ field }}</td>
+        </tr>
+	{% endfor %}
+	</tr>
+ </table>
+ <p></p>
+ <table>
+ 	<tr>
+ 		<td>
+				{% csrf_token %}
+				<input type="submit" value="Guardar" />
+			    <input type="hidden" name="next" value="{{ next }}" />
+				{% if depa %}
+					<input type="hidden" id="depa_id" name="depa" value="{{ depa.id }}"/>
+				{% endif %}
+			</form>
+		</td>
+		{% if depa %}
+			<td>
+				<form method ="post" action = "{% url sicfi.catalogos.views.delete_departamento %}">
+				  {% csrf_token %}
+					<input type="submit" value="Borrar">
+					<input type="hidden" id="depa_id" name="depa" value="{{ depa.id }}"/>
+				</form>
+			</td>
+			<td>
+				<form method ="post" action = "{% url sicfi.catalogos.views.listar_departamentos %}">
+				  {% csrf_token %}
+					<input type="submit" value="Limpiar">
+				</form>
+			</td>
+		{% endif %}
+   </tr>
+ </table>
+<h2>Departamentos</h2>
+{% if departamentos %}
+	<table width="100%" cellspacing="0" cellpadding="1">
+		<tr>
+			<td> </td>
+			<td><strong>Id</strong></td>
+			<td><strong>Descripción</strong></td>
+			<td><strong>Estado</strong></td>
+		</tr>
+		{% for departamento in departamentos %}
+		<tr>
+			<td><a class ="BLUELINK" href="{{departamento.get_absolute_url}}">Editar</a></td>
+			<td>{{departamento.id}}</td>
+			<td>{{departamento.nombre}}</td>
+			<td>{{departamento.pais}}</td>
+			<td>{{departamento.estado}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+{% else %}
+	<p> No se ha definido ningun departamento</p>
+{% endif %}
+{% endblock %}

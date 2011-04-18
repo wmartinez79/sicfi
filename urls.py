@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     (r'^$', 'sicfi.views.index'),
     #(r'^login/$', 'sicfi.usuarios.views.login', {'template_name': 'usuarios/login.html'}),
     (r'^catalogos/', include('sicfi.catalogos.urls')),
+    url(r'^chaining/', include('smart_selects.urls')),
     # Examples:
     # url(r'^$', 'sicfi.views.home', name='home'),
     # url(r'^sicfi/', include('sicfi.foo.urls')),
@@ -18,7 +19,7 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+     url(r'^admin/', include(admin.site.urls)),
 )
 
 

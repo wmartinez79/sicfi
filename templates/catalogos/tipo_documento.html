@@ -26,6 +26,11 @@
     	<td> {{ tdocumento_form.descripcion.label_tag }} </td>
     	<td> {{ tdocumento_form.descripcion }} </td>
 	</tr>
+		<tr>
+		<td> {{ tdocumento_form.estado.label_tag }} </td>
+    	<td> {{ tdocumento_form.estado }} </td>
+	</tr>
+
  </table>
  <p></p>
  <table>
@@ -63,12 +68,14 @@
 			<td> </td>
 			<td><strong>Id</strong></td>
 			<td><strong>Descripción</strong></td>
+			<td><strong>Estado</strong></td>
 		</tr>
-		{% for tdocumento in tdocumentos %}
+		{% for tdoc in tdocumentos %}
 		<tr>
-			<td><a class ="BLUELINK" href="{{tdocumento.get_absolute_url}}">Editar</a></td>
-			<td>{{tdocumento.id}}</td>
-			<td>{{tdocumento.descripcion}}</td>
+			<td><a class ="BLUELINK" href="{{tdoc.get_absolute_url}}">Editar</a></td>
+			<td>{{tdoc.id}}</td>
+			<td>{{tdoc.descripcion}}</td>
+			<td>{{tdoc.estado}}</td>
 		</tr>
 		{% endfor %}
 	</table>

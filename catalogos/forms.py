@@ -29,16 +29,14 @@ class DepartamentoForm(ModelForm):
             model = Departamento
 
 class MunicipioForm(ModelForm):
-    """
-    nombre = forms.CharField(error_messages={'required':'Este campo es requerido'})
-    pais = forms.ModelChoiceField(queryset=Pais.objects.all(),error_messages={'required':'Este campo es requerido'})
-    estado = forms.ModelChoiceField(queryset=Estado.objects.all(),error_messages={'required':'Este campo es requerido'})
-    """
+
     class Meta:
             model = Municipio
 
 class TipoDocumentoForm(ModelForm):
     descripcion = forms.CharField(error_messages={'required':'Este campo es requerido'})
+    estado = forms.ModelChoiceField(queryset=Estado.objects.all(),error_messages={'required':'Este campo es requerido'})
+
     class Meta:
             model = Tipo_Documento
 

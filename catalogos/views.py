@@ -400,7 +400,8 @@ def delete_municipio(request):
              'mensaje_error' : mensaje_error
             },
             context_instance=RequestContext(request)
-            
+        )
+
 def listar_tdocumento(request):
     tdocumentos = Tipo_Documento.objects.all().order_by('id')
     print tdocumentos
@@ -437,9 +438,9 @@ def guardar_tdocumento(request):
         tdocumento_form = TipoDocumentoForm(request.POST, instance=tdocumento)
     else:
         tdocumento_form = TipoDocumentoForm(request.POST)
-    print tdocumento_form
+
     if tdocumento_form.is_valid():
-        status = tdocumento_form.save()
+        tdocumento = tdocumento_form.save()
 
         return render_to_response(
             'catalogos/tipo_documento.html',
@@ -480,4 +481,3 @@ def delete_tdocumento(request):
             },
             context_instance=RequestContext(request)
         )
- 

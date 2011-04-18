@@ -65,6 +65,7 @@ class Municipio(models.Model):
 
 class Tipo_Documento(models.Model):
     descripcion = models.CharField(max_length = 64)
+    estado = models.ForeignKey(Estado)
 
     def __unicode__(self):
         return u'%s' % (self.descripcion)

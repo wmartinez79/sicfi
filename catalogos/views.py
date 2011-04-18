@@ -1,7 +1,7 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, HttpResponseRedirect
-from sicfi.catalogos.models import Estado, Tipo_Cliente, Pais
-from sicfi.catalogos.forms import EstadoForm, TipoClienteForm, PaisForm
+from sicfi.catalogos.models import Estado, Tipo_Cliente, Pais, Departamento, Municipio
+from sicfi.catalogos.forms import EstadoForm, TipoClienteForm, PaisForm, DepartamentoForm, MunicipioForm
 
 def listar_estados(request):
     estados = Estado.objects.all().order_by('id')
@@ -231,12 +231,170 @@ def delete_pais(request):
         return HttpResponseRedirect('/catalogos/listar_paises/')
 
     else:
-        mensaje_error = 'Error La Informacion del pais a eliminar es incorrecta'
+        mensaje_error = 'Error - La Informacion del pais a eliminar es incorrecta'
 
         return render_to_response(
             'catalogos/pais.html',
             {'pais_form' : pais_form,
              'paises': paises,
+             'mensaje_error' : mensaje_error
+            },
+            context_instance=RequestContext(request)
+        )
+
+def listar_departamentos(request):
+    departamentos = Departamento.objects.all().order_by('id')
+    departamento_form = DepartamentoForm()
+
+    return render_to_response(
+        'catalogos/departamento.html',
+        {'departamento_form' : departamento_form,
+         'departamentos': departamentos,
+        },
+        context_instance=RequestContext(request)
+    )
+
+def view_departamento(request,id):
+    departamentos = Departamento.objects.all().order_by('id')
+    depa = get_object_or_404(Departamento, pk = id)
+    departamento_form = DepartamentoForm(instance=depa)
+
+    return render_to_response(
+        'catalogos/departamento.html',
+        {'departamento_form' : departamento_form,
+         'departamentos': departamentos,
+         'depa': depa
+        },
+        context_instance=RequestContext(request)
+    )
+
+def guardar_departamento(request):
+    departamentos = Departamento.objects.all().order_by('id')
+
+    if 'depa' in request.POST:
+        depa_id = request.POST['depa']
+        depa = get_object_or_404(Departamento, pk = depa_id)
+        departamento_form = DepartamentoForm(request.POST, instance=depa)
+    else:
+        departamento_form = DepartamentoForm(request.POST)
+
+    if departamento_form.is_valid():
+        depa = departamento_form.save()
+
+        return render_to_response(
+            'catalogos/departamento.html',
+            {'departamento_form' : departamento_form,
+             'departamentos': departamentos,
+             'depa': depa
+            },
+            context_instance=RequestContext(request)
+        )
+    else:
+        mensaje_error = 'Error al guardar la informacion del Departamento'
+        return render_to_response(
+            'catalogos/departamento.html',
+            {'departamento_form' : departamento_form,
+             'departamentos': departamentos,
+             'mensaje_error' : mensaje_error
+            },
+            context_instance=RequestContext(request)
+        )
+
+def delete_departamento(request):
+    departamentos = Departamento.objects.all().order_by('id')
+    departamento_form = DepartamentoForm(request.POST)
+    if 'depa' in request.POST:
+        depa_id = request.POST['depa']
+        depa = get_object_or_404(Departamento, pk = depa_id)
+        depa.delete()
+        return HttpResponseRedirect('/catalogos/listar_departamentos/')
+
+    else:
+        mensaje_error = 'Error - La Informacion del Departamento a eliminar es incorrecta'
+
+        return render_to_response(
+            'catalogos/departamento.html',
+            {'Departamento_form' : departamento_form,
+             'departamentos': departamentos,
+             'mensaje_error' : mensaje_error
+            },
+            context_instance=RequestContext(request)
+        )
+
+def listar_municipios(request):
+    municipios = Municipio.objects.all().order_by('id')
+    municipio_form = MunicipioForm()
+
+    return render_to_response(
+        'catalogos/municipio.html',
+        {'municipio_form' : municipio_form,
+         'municipios': municipios,
+        },
+        context_instance=RequestContext(request)
+    )
+
+def view_municipio(request,id):
+    municipios = Municipio.objects.all().order_by('id')
+    muni = get_object_or_404(Municipio, pk = id)
+    municipio_form = municipioForm(instance=muni)
+
+    return render_to_response(
+        'catalogos/municipio.html',
+        {'municipio_form' : municipio_form,
+         'municipios': municipios,
+         'muni': muni
+        },
+        context_instance=RequestContext(request)
+    )
+
+def guardar_municipio(request):
+    municipios = Municipio.objects.all().order_by('id')
+
+    if 'muni' in request.POST:
+        muni_id = request.POST['muni']
+        muni = get_object_or_404(Municipio, pk = muni_id)
+        municipio_form = MunicipioForm(request.POST, instance=muni)
+    else:
+        municipio_form = MunicipioForm(request.POST)
+
+    if municipio_form.is_valid():
+        muni = municipio_form.save()
+
+        return render_to_response(
+            'catalogos/municipio.html',
+            {'municipio_form' : municipio_form,
+             'municipios': municipios,
+             'muni': muni
+            },
+            context_instance=RequestContext(request)
+        )
+    else:
+        mensaje_error = 'Error al guardar la informacion del municipio'
+        return render_to_response(
+            'catalogos/municipio.html',
+            {'municipio_form' : municipio_form,
+             'municipios': municipios,
+             'mensaje_error' : mensaje_error
+            },
+            context_instance=RequestContext(request)
+        )
+
+def delete_municipio(request):
+    municipios = Municipio.objects.all().order_by('id')
+    municipio_form = MunicipioForm(request.POST)
+    if 'muni' in request.POST:
+        muni_id = request.POST['muni']
+        muni = get_object_or_404(Municipio, pk = muni_id)
+        muni.delete()
+        return HttpResponseRedirect('/catalogos/listar_municipios/')
+
+    else:
+        mensaje_error = 'Error - La Informacion del municipio a eliminar es incorrecta'
+
+        return render_to_response(
+            'catalogos/municipio.html',
+            {'municipio_form' : municipio_form,
+             'municipioes': municipios,
              'mensaje_error' : mensaje_error
             },
             context_instance=RequestContext(request)

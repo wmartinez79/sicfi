@@ -9,7 +9,12 @@
 		<h4><b>{{ tcliente_form.errors }}</b></h4>
 	{% endif %}
   {% endif %}
- <table>
+   {% if tclient %}
+  	<h3>Editar</h3>
+  {% else %}
+  	<h3>Agregar Nuevo</h3>
+  {% endif %}
+ <table  width="70%" cellspacing="0" cellpadding="1">
  	<form method="post" action="{% url sicfi.catalogos.views.guardar_tcliente %}">
   	<tr>
 		{% if tclient %}
@@ -20,6 +25,8 @@
 	<tr>
     	<td> {{ tcliente_form.descripcion.label_tag }} </td>
     	<td> {{ tcliente_form.descripcion }} </td>
+	</tr>
+	<tr>
 		<td> {{ tcliente_form.estado.label_tag }} </td>
     	<td> {{ tcliente_form.estado }} </td>
 	</tr>
@@ -45,7 +52,7 @@
 				</form>
 			</td>
 			<td>
-				<form method ="post" action = "{% url sicfi.catalogos.views.listar_tclientes %}">
+				<form method ="post" action = "{% url sicfi.catalogos.views.listar_tcliente %}">
 				  {% csrf_token %}
 					<input type="submit" value="Limpiar">
 				</form>
@@ -64,7 +71,7 @@
 		</tr>
 		{% for tcliente in tclientes %}
 		<tr>
-			<td><a class ="BLUELINK" href="/catalogos/tcliente/{{tcliente.id}}">Editar</a></td>
+			<td><a class ="BLUELINK" href="{{tcliente.get_absolute_url}}">Editar</a></td>
 			<td>{{tcliente.id}}</td>
 			<td>{{tcliente.descripcion}}</td>
 			<td>{{tcliente.estado}}</td>

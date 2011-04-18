@@ -1,7 +1,7 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, HttpResponseRedirect
-from sicfi.catalogos.models import Estado, Tipo_Cliente
-from sicfi.catalogos.forms import EstadoForm, TipoClienteForm
+from sicfi.catalogos.models import Estado, Tipo_Cliente, Pais
+from sicfi.catalogos.forms import EstadoForm, TipoClienteForm, PaisForm
 
 def listar_estados(request):
     estados = Estado.objects.all().order_by('id')
@@ -71,7 +71,7 @@ def delete_estado(request):
         return HttpResponseRedirect('/catalogos/listar_estados/')
 
     else:
-        mensaje_error = 'la Informacion del estado a borrar es incorrecta'
+        mensaje_error = 'la Informacion del estado a eliminar es incorrecta'
 
         return render_to_response(
             'catalogos/estado.html',
@@ -82,8 +82,7 @@ def delete_estado(request):
             context_instance=RequestContext(request)
         )
 
-
-def listar_tclientes(request):
+def listar_tcliente(request):
     tclientes = Tipo_Cliente.objects.all().order_by('id')
     print tclientes
     tcliente_form = TipoClienteForm()
@@ -132,7 +131,7 @@ def guardar_tcliente(request):
             context_instance=RequestContext(request)
         )
     else:
-        mensaje_error = 'Error al guardar la informacion del Tipo de cliente'
+        mensaje_error = 'Error al guardar la informacion del Pais'
         return render_to_response(
             'catalogos/tipo_cliente.html',
             {'tcliente_form' : tcliente_form,
@@ -152,12 +151,92 @@ def delete_tcliente(request):
         return HttpResponseRedirect('/catalogos/listar_tclientes/')
 
     else:
-        mensaje_error = 'la Informacion del Tipo de cliente a borrar es incorrecta'
+        mensaje_error = 'la Informacion del Pais a eliminar es incorrecta'
 
         return render_to_response(
             'catalogos/tipo_cliente.html',
             {'tcliente_form' : tcliente_form,
              'tclientes': tclientes,
+             'mensaje_error' : mensaje_error
+            },
+            context_instance=RequestContext(request)
+        )
+
+def listar_paises(request):
+    paises = Pais.objects.all().order_by('id')
+    print paises
+    pais_form = PaisForm()
+
+    return render_to_response(
+        'catalogos/pais.html',
+        {'pais_form' : pais_form,
+         'paises': paises,
+        },
+        context_instance=RequestContext(request)
+    )
+
+def view_pais(request,id):
+    paises = Pais.objects.all().order_by('id')
+    p = get_object_or_404(Pais, pk = id)
+    pais_form = PaisForm(instance=p)
+
+    return render_to_response(
+        'catalogos/pais.html',
+        {'pais_form' : pais_form,
+         'paises': paises,
+         'p': p
+        },
+        context_instance=RequestContext(request)
+    )
+
+def guardar_pais(request):
+    paises = Pais.objects.all().order_by('id')
+
+    if 'p' in request.POST:
+        p_id = request.POST['p']
+        p = get_object_or_404(Pais, pk = p_id)
+        pais_form = PaisForm(request.POST, instance=p)
+    else:
+        pais_form = PaisForm(request.POST)
+    print pais_form
+    if pais_form.is_valid():
+        p = pais_form.save()
+
+        return render_to_response(
+            'catalogos/pais.html',
+            {'pais_form' : pais_form,
+             'paises': paises,
+             'p': p
+            },
+            context_instance=RequestContext(request)
+        )
+    else:
+        mensaje_error = 'Error al guardar la informacion del Pais'
+        return render_to_response(
+            'catalogos/pais.html',
+            {'pais_form' : pais_form,
+             'paises': paises,
+             'mensaje_error' : mensaje_error
+            },
+            context_instance=RequestContext(request)
+        )
+
+def delete_pais(request):
+    paises = Pais.objects.all().order_by('id')
+    pais_form = PaisForm(request.POST)
+    if 'p' in request.POST:
+        p_id = request.POST['p']
+        p = get_object_or_404(Pais, pk = p_id)
+        p.delete()
+        return HttpResponseRedirect('/catalogos/listar_paises/')
+
+    else:
+        mensaje_error = 'Error La Informacion del pais a eliminar es incorrecta'
+
+        return render_to_response(
+            'catalogos/pais.html',
+            {'pais_form' : pais_form,
+             'paises': paises,
              'mensaje_error' : mensaje_error
             },
             context_instance=RequestContext(request)

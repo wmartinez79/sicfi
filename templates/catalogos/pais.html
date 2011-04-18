@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block menu_h %}menu_on{% endblock %}
+
+{% block body %}
+  {% if mensaje_error %}
+    <h3><b>{{ mensaje_error }}</b></h3>
+	{% if pais_form.errors %}
+		<h4><b>{{ pais_form.errors }}</b></h4>
+	{% endif %}
+  {% endif %}
+  {% if p %}
+  	<h3>Editar</h3>
+  {% else %}
+  	<h3>Agregar Nuevo</h3>
+  {% endif %}
+ <table  width="70%" cellspacing="0" cellpadding="1">
+ 	<form method="post" action="{% url sicfi.catalogos.views.guardar_pais %}">
+  	<tr>
+		{% if p %}
+			<td>ID:</td>
+			<td>{{ p.id }}</td>
+		{% endif %}
+	</tr>
+	<tr>
+    	<td> {{ pais_form.nombre.label_tag }} </td>
+    	<td> {{ pais_form.nombre }} </td>
+	</tr>
+	<tr>
+		<td> {{ pais_form.estado.label_tag }} </td>
+    	<td> {{ pais_form.estado }} </td>
+	</tr>
+ </table>
+ <p></p>
+ <table>
+ 	<tr>
+ 		<td>
+				{% csrf_token %}
+				<input type="submit" value="Guardar" />
+			    <input type="hidden" name="next" value="{{ next }}" />
+				{% if p %}
+					<input type="hidden" id="p_id" name="p" value="{{ p.id }}"/>
+				{% endif %}
+			</form>
+		</td>
+		{% if p %}
+			<td>
+				<form method ="post" action = "{% url sicfi.catalogos.views.delete_pais %}">
+				  {% csrf_token %}
+					<input type="submit" value="Borrar">
+					<input type="hidden" id="p_id" name="p" value="{{ p.id }}"/>
+				</form>
+			</td>
+			<td>
+				<form method ="post" action = "{% url sicfi.catalogos.views.listar_paises %}">
+				  {% csrf_token %}
+					<input type="submit" value="Limpiar">
+				</form>
+			</td>
+		{% endif %}
+   </tr>
+ </table>
+<h2>Paises</h2>
+{% if paises %}
+	<table width="100%" cellspacing="0" cellpadding="1">
+		<tr>
+			<td> </td>
+			<td><strong>Id</strong></td>
+			<td><strong>Descripción</strong></td>
+			<td><strong>Estado</strong></td>
+		</tr>
+		{% for pais in paises %}
+		<tr>
+			<td><a class ="BLUELINK" href="{{pais.get_absolute_url}}">Editar</a></td>
+			<td>{{pais.id}}</td>
+			<td>{{pais.nombre}}</td>
+			<td>{{pais.estado}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+{% else %}
+	<p> No se ha definido ningun pais</p>
+{% endif %}
+{% endblock %}

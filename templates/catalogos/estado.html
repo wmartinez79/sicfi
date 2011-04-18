@@ -9,7 +9,12 @@
 		<h4><b>{{ estado_form.errors }}</b></h4>
 	{% endif %}
   {% endif %}
- <table>
+   {% if status %}
+  	<h3>Editar</h3>
+  {% else %}
+  	<h3>Agregar Nuevo</h3>
+  {% endif %}
+ <table cellspacing="0" cellpadding="1">
  	<form method="post" action="{% url sicfi.catalogos.views.guardar_estado %}">
   	<tr>
 		{% if status %}
@@ -61,7 +66,7 @@
 		</tr>
 		{% for estado in estados %}
 		<tr>
-			<td><a class ="BLUELINK" href="/catalogos/estado/{{estado.id}}">Editar</a></td>
+			<td><a class ="BLUELINK" href="{{estado.get_absolute_url}}">Editar</a></td>
 			<td>{{estado.id}}</td>
 			<td>{{estado.descripcion}}</td>
 		</tr>

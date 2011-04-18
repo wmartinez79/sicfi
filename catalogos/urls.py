@@ -7,8 +7,11 @@ urlpatterns = patterns('',
     (r'^/?borrar_estado/?$', 'sicfi.catalogos.views.delete_estado'),
     (r'^/?guardar_estado/?$', 'sicfi.catalogos.views.guardar_estado'),
     (r'^/?tcliente/(\d+)?$', 'sicfi.catalogos.views.view_tcliente'),
-    (r'^/?listar_tclientes/?$', 'sicfi.catalogos.views.listar_tclientes'),
+    (r'^/?listar_tcliente/?$', 'sicfi.catalogos.views.listar_tcliente'),
     (r'^/?borrar_tcliente/?$', 'sicfi.catalogos.views.delete_tcliente'),
     (r'^/?guardar_tcliente/?$', 'sicfi.catalogos.views.guardar_tcliente'),
-
+    (r'^/?pais/(\d+)?$', 'sicfi.catalogos.views.view_pais'),
+    (r'^/?listar_paises/?$', 'sicfi.catalogos.views.listar_paises'),
+    (r'^/?borrar_pais/?$', 'sicfi.catalogos.views.delete_pais'),
+    (r'^/?guardar_pais/?$', 'sicfi.catalogos.views.guardar_pais'),
 )

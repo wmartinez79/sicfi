@@ -8,7 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^$', 'sicfi.views.index'),
-    (r'^login/$', 'sicfi.usuarios.views.login', {'template_name': 'usuarios/login.html'}),
+    #(r'^login/$', 'sicfi.usuarios.views.login', {'template_name': 'usuarios/login.html'}),
     (r'^catalogos/', include('sicfi.catalogos.urls')),
     # Examples:
     # url(r'^$', 'sicfi.views.home', name='home'),

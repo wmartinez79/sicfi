@@ -3,32 +3,69 @@
 {% block menu_h %}menu_on{% endblock %}
 
 {% block body %}
-<form method="post" action="{% url sicfi.catalogos.views.estado_new %}">
-{% csrf_token %}
-    <ul>
-        <li>
-            {{ estado_form.descripcion.label_tag }}
-            {{ estado_form.descripcion }}
-        </li>
-	</ul>
-	<input type="submit" value="creacion" />
-    <input type="hidden" name="next" value="{{ next }}" />
-</form>
-
+  {% if mensaje_error %}
+    <h3><b>{{ mensaje_error }}</b></h3>
+	{% if estado_form.errors %}
+		<h4><b>{{ estado_form.errors }}</b></h4>
+	{% endif %}
+  {% endif %}
+ <table>
+ 	<form method="post" action="{% url sicfi.catalogos.views.guardar_estado %}">
+  	<tr>
+		{% if status %}
+			<td>ID:</td>
+			<td>{{ status.id }}</td>
+		{% endif %}
+  	</tr>
+	<tr>
+    	<td> {{ estado_form.descripcion.label_tag }} </td>
+    	<td> {{ estado_form.descripcion }} </td>
+	</tr>
+ </table>
+ <p></p>
+ <table>
+ 	<tr>
+ 		<td>
+				{% csrf_token %}
+				<input type="submit" value="Guardar" />
+			    <input type="hidden" name="next" value="{{ next }}" />
+				{% if status %}
+					<input type="hidden" id="status_id" name="status" value="{{ status.id }}"/>
+				{% endif %}
+			</form>
+		</td>
+		{% if status %}
+			<td>
+				<form method ="post" action = "{% url sicfi.catalogos.views.delete_estado %}">
+				  {% csrf_token %}
+					<input type="submit" value="Borrar">
+					<input type="hidden" id="status_id" name="status" value="{{ status.id }}"/>
+				</form>
+			</td>
+			<td>
+				<form method ="post" action = "{% url sicfi.catalogos.views.listar_estados %}">
+				  {% csrf_token %}
+					<input type="submit" value="Limpiar">
+				</form>
+			</td>
+		{% endif %}
+   </tr>
+ </table>
 <h2>Estados</h2>
 {% if estados %}
-	<table>
-		<thead>
-			<th colspan= 2 align= right>Id</th>
-			<th>Descripción</th>
-		</thead>
-	{% for estado in estados %}
-	<tr>
-		<td><a href="/catalogos/estado/{{estado.id}}">Editar</a></td>
-		<td>{{estado.id}}</td>
-		<td>{{estado.descripcion}}</td>
-	</tr>
-	{% endfor %}
+	<table width="100%" cellspacing="0" cellpadding="1">
+		<tr>
+			<td> </td>
+			<td><strong>Id</strong></td>
+			<td><strong>Descripción</strong></td>
+		</tr>
+		{% for estado in estados %}
+		<tr>
+			<td><a class ="BLUELINK" href="/catalogos/estado/{{estado.id}}">Editar</a></td>
+			<td>{{estado.id}}</td>
+			<td>{{estado.descripcion}}</td>
+		</tr>
+		{% endfor %}
 	</table>
 {% else %}
 	<p> No se ha definido ningun estado</p>

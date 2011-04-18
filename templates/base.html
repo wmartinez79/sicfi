@@ -36,11 +36,6 @@
           <form action="/search" method="get">
             {% if user.is_authenticated %}
               <span id="index_welcome">
-              {% if user.first_name or user.last_name %}
-                Welcome, {{ user.first_name }} {{ user.last_name }}
-              {% else %}
-                Welcome, {{ user.username }}
-              {% endif %}
               </span> |
               <a href="/logout/">Salir</a>
             {% else %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block menu_h %}menu_on{% endblock %}
+
+{% block body %}
+  {% if mensaje_error %}
+    <h3><b>{{ mensaje_error }}</b></h3>
+	{% if tcliente_form.errors %}
+		<h4><b>{{ tcliente_form.errors }}</b></h4>
+	{% endif %}
+  {% endif %}
+ <table>
+ 	<form method="post" action="{% url sicfi.catalogos.views.guardar_tcliente %}">
+  	<tr>
+		{% if tclient %}
+			<td>ID:</td>
+			<td>{{ tclient.id }}</td>
+		{% endif %}
+  	</tr>
+	<tr>
+    	<td> {{ tcliente_form.descripcion.label_tag }} </td>
+    	<td> {{ tcliente_form.descripcion }} </td>
+		<td> {{ tcliente_form.estado.label_tag }} </td>
+    	<td> {{ tcliente_form.estado }} </td>
+	</tr>
+ </table>
+ <p></p>
+ <table>
+ 	<tr>
+ 		<td>
+				{% csrf_token %}
+				<input type="submit" value="Guardar" />
+			    <input type="hidden" name="next" value="{{ next }}" />
+				{% if tclient %}
+					<input type="hidden" id="tclient_id" name="tclient" value="{{ tclient.id }}"/>
+				{% endif %}
+			</form>
+		</td>
+		{% if tclient %}
+			<td>
+				<form method ="post" action = "{% url sicfi.catalogos.views.delete_tcliente %}">
+				  {% csrf_token %}
+					<input type="submit" value="Borrar">
+					<input type="hidden" id="tclient_id" name="tclient" value="{{ tclient.id }}"/>
+				</form>
+			</td>
+			<td>
+				<form method ="post" action = "{% url sicfi.catalogos.views.listar_tclientes %}">
+				  {% csrf_token %}
+					<input type="submit" value="Limpiar">
+				</form>
+			</td>
+		{% endif %}
+   </tr>
+ </table>
+<h2>Tipos de Cliente</h2>
+{% if tclientes %}
+	<table width="100%" cellspacing="0" cellpadding="1">
+		<tr>
+			<td> </td>
+			<td><strong>Id</strong></td>
+			<td><strong>Descripción</strong></td>
+			<td><strong>Estado</strong></td>
+		</tr>
+		{% for tcliente in tclientes %}
+		<tr>
+			<td><a class ="BLUELINK" href="/catalogos/tcliente/{{tcliente.id}}">Editar</a></td>
+			<td>{{tcliente.id}}</td>
+			<td>{{tcliente.descripcion}}</td>
+			<td>{{tcliente.estado}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+{% else %}
+	<p> No se ha definido ningun tipo de cliente</p>
+{% endif %}
+{% endblock %}

@@ -22,5 +22,8 @@ urlpatterns = patterns('',
     (r'^/?listar_municipios/?$', 'sicfi.catalogos.views.listar_municipios'),
     (r'^/?borrar_municipio/?$', 'sicfi.catalogos.views.delete_municipio'),
     (r'^/?guardar_municipio/?$', 'sicfi.catalogos.views.guardar_municipio'),
-
+    (r'^/?tdocumento/(\d+)?$', 'sicfi.catalogos.views.view_tdocumento'),
+    (r'^/?listar_tdocumento/?$', 'sicfi.catalogos.views.listar_tdocumento'),
+    (r'^/?borrar_tdocumento/?$', 'sicfi.catalogos.views.delete_tdocumento'),
+    (r'^/?guardar_tdocumento/?$', 'sicfi.catalogos.views.guardar_tdocumento'),
 )

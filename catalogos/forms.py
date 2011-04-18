@@ -1,7 +1,8 @@
 from django import forms
 from django.forms import ModelForm
 
-from sicfi.catalogos.models import Estado, Tipo_Cliente, Pais, Departamento, Municipio
+
+from sicfi.catalogos.models import Estado, Tipo_Cliente, Pais, Departamento, Municipio, Tipo_Documento
 
 class EstadoForm(ModelForm):
     descripcion = forms.CharField(error_messages={'required':'Este campo es requerido'})
@@ -35,3 +36,9 @@ class MunicipioForm(ModelForm):
     """
     class Meta:
             model = Municipio
+
+class TipoDocumentoForm(ModelForm):
+    descripcion = forms.CharField(error_messages={'required':'Este campo es requerido'})
+    class Meta:
+            model = Tipo_Documento
+

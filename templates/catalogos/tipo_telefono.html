@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block menu_h %}menu_on{% endblock %}
+
+{% block body %}
+  {% if mensaje_error %}
+    <h3><b>{{ mensaje_error }}</b></h3>
+	{% if ttelefono_form.errors %}
+		<h4><b>{{ ttelefono_form.errors }}</b></h4>
+	{% endif %}
+  {% endif %}
+   {% if ttelefono %}
+  	<h3>Editar</h3>
+  {% else %}
+  	<h3>Agregar Nuevo</h3>
+  {% endif %}
+ <table  width="70%" cellspacing="0" cellpadding="1">
+ 	<form method="post" action="{% url sicfi.catalogos.views.guardar_ttelefono %}">
+  	<tr>
+		{% if ttelefono %}
+			<td>ID:</td>
+			<td>{{ ttelefono.id }}</td>
+		{% endif %}
+  	</tr>
+	<tr>
+    	<td> {{ ttelefono_form.descripcion.label_tag }} </td>
+    	<td> {{ ttelefono_form.descripcion }} </td>
+	</tr>
+	<tr>
+		<td> {{ ttelefono_form.estado.label_tag }} </td>
+    	<td> {{ ttelefono_form.estado }} </td>
+	</tr>
+ </table>
+ <p></p>
+ <table>
+ 	<tr>
+ 		<td>
+				{% csrf_token %}
+				<input type="submit" value="Guardar" />
+			    <input type="hidden" name="next" value="{{ next }}" />
+				{% if ttelefono %}
+					<input type="hidden" id="ttelefono_id" name="ttelefono" value="{{ ttelefono.id }}"/>
+				{% endif %}
+			</form>
+		</td>
+		{% if ttelefono %}
+			<td>
+				<form method ="post" action = "{% url sicfi.catalogos.views.delete_ttelefono %}">
+				  {% csrf_token %}
+					<input type="submit" value="Borrar">
+					<input type="hidden" id="ttelefono_id" name="ttelefono" value="{{ ttelefono.id }}"/>
+				</form>
+			</td>
+			<td>
+				<form method ="post" action = "{% url sicfi.catalogos.views.listar_ttelefono %}">
+				  {% csrf_token %}
+					<input type="submit" value="Limpiar">
+				</form>
+			</td>
+		{% endif %}
+   </tr>
+ </table>
+<h2>Tipos de Telefonos</h2>
+{% if ttelefonos %}
+	<table width="100%" cellspacing="0" cellpadding="1">
+		<tr>
+			<td> </td>
+			<td><strong>Id</strong></td>
+			<td><strong>Descripción</strong></td>
+			<td><strong>Estado</strong></td>
+		</tr>
+		{% for ttelefono in ttelefonos %}
+		<tr>
+			<td><a class ="BLUELINK" href="{{ttelefono.get_absolute_url}}">Editar</a></td>
+			<td>{{ttelefono.id}}</td>
+			<td>{{ttelefono.descripcion}}</td>
+			<td>{{ttelefono.estado}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+{% else %}
+	<p> No se ha definido ningun tipo de telefono</p>
+{% endif %}
+{% endblock %}

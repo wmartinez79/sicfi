@@ -26,4 +26,8 @@ urlpatterns = patterns('',
     (r'^/?listar_tdocumento/?$', 'sicfi.catalogos.views.listar_tdocumento'),
     (r'^/?borrar_tdocumento/?$', 'sicfi.catalogos.views.delete_tdocumento'),
     (r'^/?guardar_tdocumento/?$', 'sicfi.catalogos.views.guardar_tdocumento'),
+    (r'^/?tdireccion/(\d+)?$', 'sicfi.catalogos.views.view_tdireccion'),
+    (r'^/?listar_tdireccion/?$', 'sicfi.catalogos.views.listar_tdireccion'),
+    (r'^/?borrar_tdireccion/?$', 'sicfi.catalogos.views.delete_tdireccion'),
+    (r'^/?guardar_tdireccion/?$', 'sicfi.catalogos.views.guardar_tdireccion'),
 )

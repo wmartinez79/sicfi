@@ -73,3 +73,12 @@ class Tipo_Documento(models.Model):
     def get_absolute_url(self):
         return "/catalogos/tdocumento/%i" % self.id
 
+class Tipo_Direccion(models.Model):
+    descripcion = models.CharField(max_length = 64)
+    estado = models.ForeignKey(Estado)
+
+    def __unicode__(self):
+        return u'%s' % (self.descripcion)
+
+    def get_absolute_url(self):
+        return "/catalogos/tdireccion/%i" % self.id

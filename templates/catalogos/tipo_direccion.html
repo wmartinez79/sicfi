@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block menu_h %}menu_on{% endblock %}
+
+{% block body %}
+  {% if mensaje_error %}
+    <h3><b>{{ mensaje_error }}</b></h3>
+	{% if tdireccion_form.errors %}
+		<h4><b>{{ tdireccion_form.errors }}</b></h4>
+	{% endif %}
+  {% endif %}
+   {% if tdireccion %}
+  	<h3>Editar</h3>
+  {% else %}
+  	<h3>Agregar Nuevo</h3>
+  {% endif %}
+ <table  width="70%" cellspacing="0" cellpadding="1">
+ 	<form method="post" action="{% url sicfi.catalogos.views.guardar_tdireccion %}">
+  	<tr>
+		{% if tdireccion %}
+			<td>ID:</td>
+			<td>{{ tdireccion.id }}</td>
+		{% endif %}
+  	</tr>
+	<tr>
+    	<td> {{ tdireccion_form.descripcion.label_tag }} </td>
+    	<td> {{ tdireccion_form.descripcion }} </td>
+	</tr>
+		<tr>
+		<td> {{ tdireccion_form.estado.label_tag }} </td>
+    	<td> {{ tdireccion_form.estado }} </td>
+	</tr>
+ </table>
+ <p></p>
+ <table>
+ 	<tr>
+ 		<td>
+				{% csrf_token %}
+				<input type="submit" value="Guardar" />
+			    <input type="hidden" name="next" value="{{ next }}" />
+				{% if tdireccion %}
+					<input type="hidden" id="tdireccion_id" name="tdireccion" value="{{ tdireccion.id }}"/>
+				{% endif %}
+			</form>
+		</td>
+		{% if tdireccion %}
+			<td>
+				<form method ="post" action = "{% url sicfi.catalogos.views.delete_tdireccion %}">
+				  {% csrf_token %}
+					<input type="submit" value="Borrar">
+					<input type="hidden" id="tdireccion_id" name="tdireccion" value="{{ tdireccion.id }}"/>
+				</form>
+			</td>
+			<td>
+				<form method ="post" action = "{% url sicfi.catalogos.views.listar_tdireccion %}">
+				  {% csrf_token %}
+					<input type="submit" value="Limpiar">
+				</form>
+			</td>
+		{% endif %}
+   </tr>
+ </table>
+<h2>Tipos de Direcciones</h2>
+{% if tdirecciones %}
+	<table width="100%" cellspacing="0" cellpadding="1">
+		<tr>
+			<td> </td>
+			<td><strong>Id</strong></td>
+			<td><strong>Descripción</strong></td>
+			<td><strong>Estado</strong></td>
+		</tr>
+		{% for tdireccion in tdirecciones %}
+		<tr>
+			<td><a class ="BLUELINK" href="{{tdireccion.get_absolute_url}}">Editar</a></td>
+			<td>{{tdireccion.id}}</td>
+			<td>{{tdireccion.descripcion}}</td>
+			<td>{{tdireccion.estado}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+{% else %}
+	<p> No se ha definido ningun tipo de direccion</p>
+{% endif %}
+{% endblock %}

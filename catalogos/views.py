@@ -1,7 +1,7 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, HttpResponseRedirect
-from sicfi.catalogos.models import Estado, Tipo_Cliente, Pais, Departamento, Municipio, Tipo_Documento
-from sicfi.catalogos.forms import EstadoForm, TipoClienteForm, PaisForm, DepartamentoForm, MunicipioForm, TipoDocumentoForm
+from sicfi.catalogos.models import Estado, Tipo_Cliente, Pais, Departamento, Municipio, Tipo_Documento, Tipo_Direccion
+from sicfi.catalogos.forms import EstadoForm, TipoClienteForm, PaisForm, DepartamentoForm, MunicipioForm, TipoDocumentoForm, TipoDireccionForm
 
 def listar_estados(request):
     estados = Estado.objects.all().order_by('id')
@@ -477,6 +477,86 @@ def delete_tdocumento(request):
             'catalogos/tipo_documento.html',
             {'documento_form' : tdocumento_form,
              'tdocumentos': tdocumentos,
+             'mensaje_error' : mensaje_error
+            },
+            context_instance=RequestContext(request)
+        )
+
+def listar_tdireccion(request):
+    tdirecciones = Tipo_Direccion.objects.all().order_by('id')
+    print tdirecciones
+    tdireccion_form = TipoDireccionForm()
+
+    return render_to_response(
+        'catalogos/tipo_direccion.html',
+        {'tdireccion_form' : tdireccion_form,
+         'tdirecciones': tdirecciones,
+        },
+        context_instance=RequestContext(request)
+    )
+
+def view_tdireccion(request,id):
+    tdirecciones = Tipo_Direccion.objects.all().order_by('id')
+    tdireccion = get_object_or_404(Tipo_Direccion, pk = id)
+    tdireccion_form = TipoDireccionForm(instance=tdireccion)
+
+    return render_to_response(
+        'catalogos/tipo_direccion.html',
+        {'tdireccion_form' : tdireccion_form,
+         'tdirecciones': tdirecciones,
+         'tdireccion': tdireccion
+        },
+        context_instance=RequestContext(request)
+    )
+
+def guardar_tdireccion(request):
+    tdirecciones = Tipo_Direccion.objects.all().order_by('id')
+
+    if 'tdireccion' in request.POST:
+        tdireccion_id = request.POST['tdireccion']
+        tdireccion = get_object_or_404(Tipo_Direccion, pk = tdireccion_id)
+        tdireccion_form = TipoDireccionForm(request.POST, instance=tdireccion)
+    else:
+        tdireccion_form = TipoDireccionForm(request.POST)
+    print tdireccion_form
+    if tdireccion_form.is_valid():
+        tdireccion = tdireccion_form.save()
+
+        return render_to_response(
+            'catalogos/tipo_direccion.html',
+            {'tdireccion_form' : tdireccion_form,
+             'tdirecciones': tdirecciones,
+             'tdireccion': tdireccion
+            },
+            context_instance=RequestContext(request)
+        )
+    else:
+        mensaje_error = 'Error al guardar la informacion del Tipo de Direccion'
+        return render_to_response(
+            'catalogos/tipo_direccion.html',
+            {'tdireccion_form' : tdireccion_form,
+             'tdirecciones': tdirecciones,
+             'mensaje_error' : mensaje_error
+            },
+            context_instance=RequestContext(request)
+        )
+
+def delete_tdireccion(request):
+    tdirecciones = Tipo_Direccion.objects.all().order_by('id')
+    tdireccion_form = TipoDireccionForm(request.POST)
+    if 'tdireccion' in request.POST:
+        tdireccion_id = request.POST['tdireccion']
+        tdireccion = get_object_or_404(Tipo_Direccion, pk = tdireccion_id)
+        tdireccion.delete()
+        return HttpResponseRedirect('/catalogos/listar_tdireccion/')
+
+    else:
+        mensaje_error = 'la Informacion del Tipo de Direccion a eliminar es incorrecta'
+
+        return render_to_response(
+            'catalogos/tipo_direccion.html',
+            {'tdireccion_form' : tdireccion_form,
+             'tdirecciones': tdirecciones,
              'mensaje_error' : mensaje_error
             },
             context_instance=RequestContext(request)

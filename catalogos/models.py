@@ -82,3 +82,13 @@ class Tipo_Direccion(models.Model):
 
     def get_absolute_url(self):
         return "/catalogos/tdireccion/%i" % self.id
+
+class Tipo_Telefono(models.Model):
+    descripcion = models.CharField(max_length = 64)
+    estado = models.ForeignKey(Estado)
+
+    def __unicode__(self):
+        return u'%s' % (self.descripcion)
+
+    def get_absolute_url(self):
+        return "/catalogos/ttelefono/%i" % self.id

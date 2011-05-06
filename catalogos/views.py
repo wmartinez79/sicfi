@@ -1,7 +1,7 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, HttpResponseRedirect
-from sicfi.catalogos.models import Estado, Tipo_Cliente, Pais, Departamento, Municipio, Tipo_Documento, Tipo_Direccion
-from sicfi.catalogos.forms import EstadoForm, TipoClienteForm, PaisForm, DepartamentoForm, MunicipioForm, TipoDocumentoForm, TipoDireccionForm
+from sicfi.catalogos.models import Estado, Tipo_Cliente, Pais, Departamento, Municipio, Tipo_Documento, Tipo_Direccion, Tipo_Telefono
+from sicfi.catalogos.forms import EstadoForm, TipoClienteForm, PaisForm, DepartamentoForm, MunicipioForm, TipoDocumentoForm, TipoDireccionForm, TipoTelefonoForm
 
 def listar_estados(request):
     estados = Estado.objects.all().order_by('id')
@@ -557,6 +557,86 @@ def delete_tdireccion(request):
             'catalogos/tipo_direccion.html',
             {'tdireccion_form' : tdireccion_form,
              'tdirecciones': tdirecciones,
+             'mensaje_error' : mensaje_error
+            },
+            context_instance=RequestContext(request)
+        )
+
+def listar_ttelefono(request):
+    ttelefonos = Tipo_Telefono.objects.all().order_by('id')
+    print ttelefonos
+    ttelefono_form = TipoTelefonoForm()
+
+    return render_to_response(
+        'catalogos/tipo_telefono.html',
+        {'ttelefono_form' : ttelefono_form,
+         'ttelefonos': ttelefonos,
+        },
+        context_instance=RequestContext(request)
+    )
+
+def view_ttelefono(request,id):
+    ttelefonos = Tipo_Telefono.objects.all().order_by('id')
+    ttelefono = get_object_or_404(Tipo_Telefono, pk = id)
+    ttelefono_form = TipoTelefonoForm(instance=ttelefono)
+
+    return render_to_response(
+        'catalogos/tipo_telefono.html',
+        {'ttelefono_form' : ttelefono_form,
+         'ttelefonos': ttelefonos,
+         'ttelefono': ttelefono
+        },
+        context_instance=RequestContext(request)
+    )
+
+def guardar_ttelefono(request):
+    ttelefonos = Tipo_Telefono.objects.all().order_by('id')
+
+    if 'ttelefono' in request.POST:
+        ttelefono_id = request.POST['ttelefono']
+        ttelefono = get_object_or_404(Tipo_Telefono, pk = ttelefono_id)
+        ttelefono_form = TipoTelefonoForm(request.POST, instance=ttelefono)
+    else:
+        ttelefono_form = TipoTelefonoForm(request.POST)
+    print ttelefono_form
+    if ttelefono_form.is_valid():
+        ttelefono = ttelefono_form.save()
+
+        return render_to_response(
+            'catalogos/tipo_telefono.html',
+            {'ttelefono_form' : ttelefono_form,
+             'ttelefonos': ttelefonos,
+             'ttelefono': ttelefono
+            },
+            context_instance=RequestContext(request)
+        )
+    else:
+        mensaje_error = 'Error al guardar la informacion del Tipo de Telefono'
+        return render_to_response(
+            'catalogos/tipo_telefono.html',
+            {'ttelefono_form' : ttelefono_form,
+             'ttelefonos': ttelefonos,
+             'mensaje_error' : mensaje_error
+            },
+            context_instance=RequestContext(request)
+        )
+
+def delete_ttelefono(request):
+    ttelefonos = Tipo_Telefono.objects.all().order_by('id')
+    ttelefono_form = TipoTelefonoForm(request.POST)
+    if 'ttelefono' in request.POST:
+        ttelefono_id = request.POST['ttelefono']
+        ttelefono = get_object_or_404(Tipo_Telefono, pk = ttelefono_id)
+        ttelefono.delete()
+        return HttpResponseRedirect('/catalogos/listar_ttelefono/')
+
+    else:
+        mensaje_error = 'la Informacion del Tipo de Telefono a eliminar es incorrecta'
+
+        return render_to_response(
+            'catalogos/tipo_telefono.html',
+            {'ttelefono_form' : ttelefono_form,
+             'ttelefonos': ttelefonos,
              'mensaje_error' : mensaje_error
             },
             context_instance=RequestContext(request)

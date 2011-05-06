@@ -30,4 +30,8 @@ urlpatterns = patterns('',
     (r'^/?listar_tdireccion/?$', 'sicfi.catalogos.views.listar_tdireccion'),
     (r'^/?borrar_tdireccion/?$', 'sicfi.catalogos.views.delete_tdireccion'),
     (r'^/?guardar_tdireccion/?$', 'sicfi.catalogos.views.guardar_tdireccion'),
+    (r'^/?ttelefono/(\d+)?$', 'sicfi.catalogos.views.view_ttelefono'),
+    (r'^/?listar_ttelefono/?$', 'sicfi.catalogos.views.listar_ttelefono'),
+    (r'^/?borrar_ttelefono/?$', 'sicfi.catalogos.views.delete_ttelefono'),
+    (r'^/?guardar_ttelefono/?$', 'sicfi.catalogos.views.guardar_ttelefono'),
 )

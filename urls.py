@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     (r'^$', 'sicfi.views.index'),
     #(r'^login/$', 'sicfi.usuarios.views.login', {'template_name': 'usuarios/login.html'}),
     (r'^catalogos/', include('sicfi.catalogos.urls')),
+    (r'^configuracion/', include('sicfi.configuracion.urls')),
     url(r'^chaining/', include('smart_selects.urls')),
     # Examples:
     # url(r'^$', 'sicfi.views.home', name='home'),

@@ -9,65 +9,64 @@
 		<h4><b>{{ estado_form.errors }}</b></h4>
 	{% endif %}
   {% endif %}
-   {% if status %}
-  	<h3>Editar</h3>
-  {% else %}
-  	<h3>Agregar Nuevo</h3>
-  {% endif %}
- <table cellspacing="0" cellpadding="1">
- 	<form method="post" action="{% url sicfi.catalogos.views.guardar_estado %}">
-  	<tr>
-		{% if status %}
-			<td>ID:</td>
-			<td>{{ status.id }}</td>
-		{% endif %}
-  	</tr>
-	<tr>
-    	<td> {{ estado_form.descripcion.label_tag }} </td>
-    	<td> {{ estado_form.descripcion }} </td>
-	</tr>
- </table>
- <p></p>
- <table>
- 	<tr>
- 		<td>
-				{% csrf_token %}
-				<input type="submit" value="Guardar" />
-			    <input type="hidden" name="next" value="{{ next }}" />
+  <div class="div_ingreso_datos">
+  	  {% if status %}
+		<h3>Editar</h3>
+	  {% else %}
+	  	<h3>Agregar Nuevo</h3>
+	  {% endif %}
+
+	  <form method="post" action="{% url sicfi.catalogos.views.guardar_estado %}">
+		 <table class="ingresar_info">
+		  	<tr>
 				{% if status %}
-					<input type="hidden" id="status_id" name="status" value="{{ status.id }}"/>
+					<td class="etiquetas"><label>ID:</label></td>
+					<td>{{ status.id }}</td>
 				{% endif %}
-			</form>
-		</td>
-		{% if status %}
-			<td>
-				<form method ="post" action = "{% url sicfi.catalogos.views.delete_estado %}">
-				  {% csrf_token %}
-					<input type="submit" value="Borrar">
-					<input type="hidden" id="status_id" name="status" value="{{ status.id }}"/>
-				</form>
-			</td>
-			<td>
-				<form method ="post" action = "{% url sicfi.catalogos.views.listar_estados %}">
-				  {% csrf_token %}
-					<input type="submit" value="Limpiar">
-				</form>
-			</td>
-		{% endif %}
-   </tr>
- </table>
-<h2>Estados</h2>
+		  	</tr>
+			<tr>
+		    	<td class="etiquetas"> {{ estado_form.descripcion.label_tag }} </td>
+		    	<td> {{ estado_form.descripcion }} </td>
+			</tr>
+		 </table>
+	 <table class="botones">
+	 	<tr>
+	 		<td>
+				{% csrf_token %}
+					<input type="submit" value="Guardar" />
+				    <input type="hidden" name="next" value="{{ next }}" />
+					{% if status %}
+						<input type="hidden" id="status_id" name="status" value="{{ status.id }}"/>
+					{% endif %}
+			  </form>
+			 </td>
+			  {% if status %}
+			  	<td>
+					<form method ="post" action = "{% url sicfi.catalogos.views.delete_estado %}">
+					  {% csrf_token %}
+						<input type="submit" value="Eliminar">
+						<input type="hidden" id="status_id" name="status" value="{{ status.id }}"/>
+					</form>
+				</td>
+				<td>
+					<form method ="post" action = "{% url sicfi.catalogos.views.listar_estados %}">
+					  {% csrf_token %}
+						<input type="submit" value="Limpiar">
+					</form>
+				</td>
+			  {% endif %}
+	</table>
+</div>
+<h2 id="encabezado_listado">Estados</h2>
 {% if estados %}
-	<table width="100%" cellspacing="0" cellpadding="1">
-		<tr>
-			<td> </td>
-			<td><strong>Id</strong></td>
-			<td><strong>Descripción</strong></td>
-		</tr>
+	<table id = "listados">
+		<thead>
+			<th><strong>Id</strong></th>
+			<th><strong>Descripción</strong></th>
+		</thead>
 		{% for estado in estados %}
 		<tr>
-			<td><a class ="BLUELINK" href="{{estado.get_absolute_url}}">Editar</a></td>
-			<td>{{estado.id}}</td>
+			<td><a class ="BLUELINK" href="{{estado.get_absolute_url}}">{{estado.id}}</a></td>
 			<td>{{estado.descripcion}}</td>
 		</tr>
 		{% endfor %}

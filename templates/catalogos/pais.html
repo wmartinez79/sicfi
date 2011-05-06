@@ -18,7 +18,7 @@
  	<form method="post" action="{% url sicfi.catalogos.views.guardar_pais %}">
   	<tr>
 		{% if p %}
-			<td>ID:</td>
+			<td class="etiquetas"><label>ID:</label></td>
 			<td>{{ p.id }}</td>
 		{% endif %}
 	</tr>

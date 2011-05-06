@@ -1,5 +1,7 @@
 from django.db import models
 
+
+
 class Empresa(models.Model):
     nombre = models.CharField(max_length = 60)
     ruc = models.CharField(max_length = 30)

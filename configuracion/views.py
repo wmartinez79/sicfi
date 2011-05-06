@@ -3,6 +3,8 @@ from django.shortcuts import render_to_response, get_object_or_404, HttpResponse
 from sicfi.configuracion.models import Empresa
 from sicfi.configuracion.forms import EmpresaForm
 
+
+
 def listar_empresas(request):
     empresas = Empresa.objects.all().order_by('id')
     print empresas

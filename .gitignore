@@ -1,0 +1,7 @@
+*.[oa]
+*.lo
+*.la
+*.gmo
+semantic.cache
+*~
+*.pyc

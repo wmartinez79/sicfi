@@ -1,0 +1,131 @@
+/*
+ CSS styles that apply to every page -- don't put page specific styles
+ in here, put them in a separate file
+ */
+body {
+  font-family:arial,sans-serif;
+  font-size:14px;
+  text-align:center;
+  padding-top:10px;
+}
+#main { border:1px solid #d0d0d0; }
+#logo { float:left; }
+#header { text-align:right; font-size:13px; }
+#header form { padding-top:10px; }
+#menu_home { width:186px; }
+.menu_btn {
+  float:left;
+  width:190px;
+  padding:5px 0px 7px 0px;
+  margin:0px;
+  color:white; font-family:verdana; font-size:13px;
+}
+.menu_on {
+  background-image:url('/media/images/bluemenudark.jpg');
+  font-weight:bold;
+}
+.menu_off { background-image:url('/media/images/bluemenu.jpg'); }
+.menu_sep {
+  float:left;
+  width:1px;
+  padding:5px 0px 5px 0px;
+  margin:0px;
+}
+.menu_btn a { color:white; text-decoration:none; }
+#index_menu { margin:0px; padding:0px; }
+#container_body {
+  /* we are in a 950px grid layout, but subtract 2px for borders and
+   * 40px for padding */
+  width:908px;
+  /* we want the body div to be span-23. so we take one span-1, which is
+   * 30px, plus a column margin, which is 10px, and pad the body div
+   * with these 40px on each side. because of the border, the right
+   * side will actually be 2px short on screen. */
+  padding:15px 20px 15px 20px;
+  border:1px solid #d0d0d0; margin-top:0px;
+  text-align:left;
+  line-height:1.1;
+}
+#footer { font-size:12px; text-align:right; }
+#footer_links { float:left; }
+a.gray { color:#505050; }
+a.gray:visited { color:#505050; }
+
+#listados
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: 2px;
+	width: 95%;
+	text-align: left;
+	border-collapse: collapse;
+}
+#listados th
+{
+	font-size: 13px;
+	font-weight: normal;
+	padding: 8px;
+	background: #b9c9fe url('table-images/gradhead.png') repeat-x;
+	border-top: 2px solid #d3ddff;
+	border-bottom: 1px solid #fff;
+	color: #039;
+}
+#listados td
+{
+	padding: 8px;
+	border-bottom: 1px solid #fff;
+	color: #669;
+	border-top: 1px solid #fff;
+	background: #e8edff url('table-images/gradback.png') repeat-x;
+}
+#listados tfoot tr td
+{
+	background: #e8edff;
+	font-size: 12px;
+	color: #99c;
+}
+#listados tbody tr:hover td
+{
+	background: #d0dafd url('table-images/gradhover.png') repeat-x;
+	color: #339;
+}
+
+.botones
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: 2px;
+	width: 40%;
+	text-align: left;
+	border-collapse: collapse;
+}
+
+.ingresar_info
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: 0px;
+	width: 80%;
+	text-align: left;
+	padding:0px;
+}
+
+.ingresar_info tr
+{
+	padding:0px;
+}
+
+.etiquetas
+{
+	width: 20%;
+}
+
+.div_ingreso_datos
+{
+	border:1px solid #D0D0D0;
+	line-height:1.1;
+	margin-bottom: 10px;
+	padding:5px 5px;
+	text-align:left;
+	width=100%;
+}

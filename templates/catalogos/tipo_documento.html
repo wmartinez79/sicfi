@@ -18,7 +18,7 @@
  	<form method="post" action="{% url sicfi.catalogos.views.guardar_tdocumento %}">
   	<tr>
 		{% if tdocumento %}
-			<td>ID:</td>
+			<td class="etiquetas"><label>ID:</label></td>
 			<td>{{ tdocumento.id }}</td>
 		{% endif %}
   	</tr>

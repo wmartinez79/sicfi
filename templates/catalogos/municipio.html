@@ -18,7 +18,7 @@
  	<form method="post" action="{% url sicfi.catalogos.views.guardar_municipio %}">
   	<tr>
 		{% if muni %}
-			<td>ID:</td>
+			<td class="etiquetas"><label>ID:</label></td>
 			<td>{{ muni.id }}</td>
 		{% endif %}
 	</tr>
@@ -59,7 +59,7 @@
 		{% endif %}
    </tr>
  </table>
-<h2>municipios</h2>
+<h2>Municipios</h2>
 {% if municipios %}
 	<table width="100%" cellspacing="0" cellpadding="1">
 		<tr>

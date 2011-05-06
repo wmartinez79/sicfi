@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.conf.urls.defaults import *
+from django.views.static import *
 from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
@@ -8,7 +9,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^$', 'sicfi.views.index'),
-    #(r'^login/$', 'sicfi.usuarios.views.login', {'template_name': 'usuarios/login.html'}),
     (r'^catalogos/', include('sicfi.catalogos.urls')),
     url(r'^chaining/', include('smart_selects.urls')),
     # Examples:
@@ -20,6 +20,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
      url(r'^admin/', include(admin.site.urls)),
+     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
 
 

@@ -32,7 +32,7 @@
 	</tr>
  </table>
  <p></p>
- <table>
+ <table class="botones">
  	<tr>
  		<td>
 				{% csrf_token %}
@@ -62,13 +62,13 @@
  </table>
 <h2>Tipos de Cliente</h2>
 {% if tclientes %}
-	<table width="100%" cellspacing="0" cellpadding="1">
-		<tr>
-			<td> </td>
-			<td><strong>Id</strong></td>
-			<td><strong>Descripción</strong></td>
-			<td><strong>Estado</strong></td>
-		</tr>
+	<table id="listados">
+		<thead>
+			<th> </th>
+			<th><strong>Id</strong></th>
+			<th><strong>Descripción</strong></th>
+			<th><strong>Estado</strong></th>
+		</thead>
 		{% for tcliente in tclientes %}
 		<tr>
 			<td><a class ="BLUELINK" href="{{tcliente.get_absolute_url}}">Editar</a></td>

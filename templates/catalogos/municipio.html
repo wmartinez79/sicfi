@@ -14,8 +14,8 @@
   {% else %}
   	<h3>Agregar Nuevo</h3>
   {% endif %}
- <table  width="70%" cellspacing="0" cellpadding="1">
  	<form method="post" action="{% url sicfi.catalogos.views.guardar_municipio %}">
+ 	 <table class="ingresar_info">
   	<tr>
 		{% if muni %}
 			<td class="etiquetas"><label>ID:</label></td>
@@ -31,7 +31,7 @@
 	</tr>
  </table>
  <p></p>
- <table>
+ <table class="botones">
  	<tr>
  		<td>
 				{% csrf_token %}
@@ -61,19 +61,22 @@
  </table>
 <h2>Municipios</h2>
 {% if municipios %}
-	<table width="100%" cellspacing="0" cellpadding="1">
-		<tr>
-			<td> </td>
-			<td><strong>Id</strong></td>
-			<td><strong>Descripción</strong></td>
-			<td><strong>Estado</strong></td>
-		</tr>
+	<table  id= "listados">
+		<thead>
+			<th> </th>
+			<th><strong>Id</strong></th>
+			<th><strong>Descripción</strong></th>
+			<th><strong>País</strong></th>
+			<th><strong>Departamento</strong></th>
+			<th><strong>Estado</strong></th>
+		</thead>
 		{% for municipio in municipios %}
 		<tr>
 			<td><a class ="BLUELINK" href="{{municipio.get_absolute_url}}">Editar</a></td>
 			<td>{{municipio.id}}</td>
 			<td>{{municipio.nombre}}</td>
 			<td>{{municipio.pais}}</td>
+			<td>{{municipio.departamento}}</td>
 			<td>{{municipio.estado}}</td>
 		</tr>
 		{% endfor %}

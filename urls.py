@@ -10,6 +10,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^$', 'sicfi.views.index'),
     (r'^catalogos/', include('sicfi.catalogos.urls')),
+    (r'^clientes/', include('sicfi.clientes.urls')),
     (r'^configuracion/', include('sicfi.configuracion.urls')),
     url(r'^chaining/', include('smart_selects.urls')),
     # Examples:

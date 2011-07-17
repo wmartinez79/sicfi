@@ -338,7 +338,7 @@ def listar_municipios(request):
 def view_municipio(request,id):
     municipios = Municipio.objects.all().order_by('id')
     muni = get_object_or_404(Municipio, pk = id)
-    municipio_form = municipioForm(instance=muni)
+    municipio_form = MunicipioForm(instance=muni)
 
     return render_to_response(
         'catalogos/municipio.html',

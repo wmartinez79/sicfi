@@ -40,7 +40,7 @@ class Departamento(models.Model):
     estado = models.ForeignKey(Estado)
 
     def __unicode__(self):
-        return u'%s' % (self.nombre + ' de '+ self.pais)
+        return u'%s' % (self.nombre + ' de '+ self.pais.nombre)
 
     def get_absolute_url(self):
         return "/catalogos/departamento/%i" % self.id

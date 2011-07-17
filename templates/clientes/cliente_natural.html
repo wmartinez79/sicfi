@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block menu_h %}menu_on{% endblock %}
+
+{% block body %}
+  {% if mensaje_error %}
+    <h3><b>{{ mensaje_error }}</b></h3>
+	{% if cliente_form.errors %}
+		<h4><b>{{ cliente_form.errors }}</b></h4>
+	{% endif %}
+  {% endif %}
+  <form method="post" action="{% url sicfi.clientes.views.view_cliente_natural %}">
+  <fieldset class="module aligned ">
+
+	{% for field in cliente_form %}
+	    <div class="form-row">
+	            <div class="field-box">
+	                {{ field.errors }}
+	                {{ field.label_tag }}: {{ field }}
+	            </div>
+	    </div>
+	{% endfor %}
+	</fieldset>
+	<fieldset class="module aligned ">
+	<h2>Direcciones</h2>
+	<table>
+	     <tr>
+	     {% for field in direccion_formset.forms.0 %}
+	          {% if not field.is_hidden %}
+	               <th>{{ field.label }}</th>
+	          {% endif %}
+	     {% endfor %}
+	     </tr>
+	     {% for f in direccion_formset.management_form %}
+	          {{ f }}
+	     {% endfor %}
+	     {% for f in direccion_formset.forms %}
+	          <tr>
+	          {% for field in f %}
+	               {% if not field.is_hidden %}
+	                    <td>
+	                    {{ field.errors }}
+	                    {{ field }}
+	                    </td>
+	               {% else %}
+	                    <td valign="bottom">{{ field }}</
+	               {% endif %}
+	          {% endfor %}
+	          </tr>
+	     {% endfor %}
+	</table>
+	</fieldset>
+
+	<fieldset class="module aligned ">
+	<h2>Telefonos</h2>
+	<table>
+	     <tr>
+	     {% for field in telefono_formset.forms.0 %}
+	          {% if not field.is_hidden %}
+	               <th>{{ field.label }}</th>
+	          {% endif %}
+	     {% endfor %}
+	     </tr>
+	     {% for f in telefono_formset.management_form %}
+	          {{ f }}
+	     {% endfor %}
+	     {% for f in telefono_formset.forms %}
+	          <tr>
+	          {% for field in f %}
+	               {% if not field.is_hidden %}
+	                    <td>
+	                    {{ field.errors }}
+	                    {{ field }}
+	                    </td>
+	               {% else %}
+	                    <td valign="bottom">{{ field }}</
+	               {% endif %}
+	          {% endfor %}
+	          </tr>
+	     {% endfor %}
+	</table>
+	</fieldset>
+	{% csrf_token %}
+	<input type="submit" value="Guardar" />
+    <input type="hidden" name="next" value="{{ next }}" />
+	{% if cliente %}
+		<input type="hidden" id="cliente_id" name="cliente_" value="{{ cliente.id }}"/>
+	{% endif %}
+{% endblock %}

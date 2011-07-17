@@ -20,10 +20,19 @@
         <link href="{{ MEDIA_URL }}headers/css/sicfi.css"
             rel="stylesheet" type="text/css" />
         <script type="text/javascript"
-                src="http://code.jquery.com/jquery-1.4.2.min.js">
+                src="{{ MEDIA_URL }}headers/js/jquery-1.5.1.min.js">
+        </script>
+		<script type="text/javascript"
+                src="{{ MEDIA_URL }}headers/js/jquery-ui-1.8.12.custom.min.js">
         </script>
         <script type="text/javascript" src="{{ MEDIA_URL }}headers/js/sicfi.js">
         </script>
+		<script type="text/javascript">
+			$(function(){
+				// Tabs
+				$('#tabs').tabs();
+			});
+ 		</script>
         {% block pagejs %}{% endblock %}
         {% block pagecss %}{% endblock %}
     </head>

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block menu_h %}menu_on{% endblock %}
+
+{% block body %}
+<h2 id="encabezado_listado">Clientes</h2>
+{% if estados %}
+	<table id = "listados">
+		<thead>
+			<th><strong>Id</strong></th>
+			<th><strong>Tipo de Cliente</strong></th>
+			<th><strong>Nombre</strong></th>
+			<th><strong>tipo_documento</strong></th>
+			<th><strong>numero_documento</strong></th>
+			<th><strong>exento</strong></th>
+			<th><strong>email</strong></th>
+		</thead>
+		{% for cliente in clientes %}
+		<tr>
+			<td><a class ="BLUELINK" href="{{cliente.get_absolute_url}}">{{cliente.id}}</a></td>
+			<td>{{cliente.tipo_cliente}}</td>
+			<td>{{cliente.get_nombre}}</td>
+			<td>{{cliente.tipo_documento}}</td>
+			<td>{{cliente.numero_documento}}</td>
+			<td>{{cliente.exento}}</td>
+			<td>{{cliente.email}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+{% else %}
+	<p> No existe ningun cliente en la Base de Datos</p>
+{% endif %}
+{% endblock %}

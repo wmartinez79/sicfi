@@ -8,97 +8,96 @@
 {% block menu_h %}menu_on{% endblock %}
 
 {% block body %}
+	<div class="span-23 last" id="index">
 
-<div class="span-23 last" id="index">
+	  <div class="span-8 index_archivo_sec" id="archivo_links">
+	    <h3>Archivo</h3>
+		<h4> Administración </h4>
+		<p class="index_links">
 
-  <div class="span-8 index_archivo_sec" id="archivo_links">
-    <h3>Archivo</h3>
-	<h4> Administración </h4>
-	<p class="index_links">
+	    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+		<a href="/administra/crear_usuario">Crear Usuario</a>
+	    <br/>
 
-    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-	<a href="/administra/crear_usuario">Crear Usuario</a>
-    <br/>
+		<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/administra/password">Cambiar Contraseña</a>
+	    <br/>
 
-	<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/administra/password">Cambiar Contraseña</a>
-    <br/>
+		<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/administra/roles">Crear Roles</a>
+	    <br/>
 
-	<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/administra/roles">Crear Roles</a>
-    <br/>
+		<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+		<a href="/administra/permisos">Crear Permisos</a>
+	    <br/>
 
-	<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-	<a href="/administra/permisos">Crear Permisos</a>
-    <br/>
+		<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+		<a href="/administra/permisos_esp">Crear Permisos Especiales</a>
+	    <br/>
+		</p>
 
-	<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-	<a href="/administra/permisos_esp">Crear Permisos Especiales</a>
-    <br/>
-	</p>
+		<h4> Configuración </h4>
+		<p class="index_links">
+	    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+		<a href="/config/empresa">Empresa</a>
+	    <br/>
 
-	<h4> Configuración </h4>
-	<p class="index_links">
-    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-	<a href="/config/empresa">Empresa</a>
-    <br/>
+	    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/config/tipo_cambio_ofi">Tipo de cambio oficial</a>
+	    <br/>
 
-    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/config/tipo_cambio_ofi">Tipo de cambio oficial</a>
-    <br/>
+	    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/config/tipo_cambio_vent">Tipo de cambio de venta</a>
+	    <br/>
+		</p>
+	  </div>
 
-    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/config/tipo_cambio_vent">Tipo de cambio de venta</a>
-    <br/>
-	</p>
-  </div>
+	  <div class="span-8 index_clientes_sec" id="clientes_link">
 
-  <div class="span-8 index_clientes_sec" id="clientes_link">
+	    <h3>Clientes</h3>
+		<h4>Procesos</h4>
+	    <p class="index_links">
 
-    <h3>Clientes</h3>
-	<h4>Procesos</h4>
-    <p class="index_links">
+	    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/clientes/cliente_natural">Crear Cliente Natural</a> <br/>
 
-    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/clientes/cliente_natural">Crear Cliente Natural</a> <br/>
+		<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/clientes/cliente_juridico">Crear Cliente Juridico</a> <br/>
 
-	<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/clientes/cliente_juridico">Crear Cliente Juridico</a> <br/>
+		<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/clientes/listar_clientes">Listar Clientes</a> <br/>
 
-	<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/clientes/listar_clientes">Listar Clientes</a> <br/>
+		<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/clientes/buscar">Buscar Cliente</a> <br/>
 
-	<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/clientes/buscar">Buscar Cliente</a> <br/>
+	    </p>
+		<h4>Catalogos</h4>
+	    <p class="index_links">
+	    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/catalogos/listar_estados">Estados</a> <br/>
 
-    </p>
-	<h4>Catalogos</h4>
-    <p class="index_links">
-    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/catalogos/listar_estados">Estados</a> <br/>
+	    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/catalogos/listar_tcliente">Tipos de Cliente</a> <br/>
 
-    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/catalogos/listar_tcliente">Tipos de Cliente</a> <br/>
+	    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/catalogos/listar_tdocumento">Tipos de Documento</a> <br/>
 
-    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/catalogos/listar_tdocumento">Tipos de Documento</a> <br/>
+		<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/catalogos/listar_tdireccion">Tipos de Dirección</a> <br/>
 
-	<img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/catalogos/listar_tdireccion">Tipos de Dirección</a> <br/>
+	    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/catalogos/listar_ttelefono">Tipos de Teléfono</a> <br/>
 
-    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/catalogos/listar_ttelefono">Tipos de Teléfono</a> <br/>
+	    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/catalogos/listar_paises">País</a> <br/>
 
-    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/catalogos/listar_paises">País</a> <br/>
+	    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/catalogos/listar_departamentos">Departamentos</a> <br/>
 
-    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/catalogos/listar_departamentos">Departamentos</a> <br/>
+	    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
+	    <a href="/catalogos/listar_municipios">Municipios</a> <br/>
+	    </p>
 
-    <img src="{{ MEDIA_URL }}images/redabtn.jpg" />
-    <a href="/catalogos/listar_municipios">Municipios</a> <br/>
-    </p>
-
-  </div>
-</div> {# index_nav #}
+	  </div>
+	</div> {# index_nav #}
 {% endblock %}

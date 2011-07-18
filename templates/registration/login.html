@@ -13,24 +13,27 @@
 <p>El usuario y password ingresado es incorrecto. Por favor intentelo de nuevo.</p>
 {% endif %}
 
-<h3>Usuarios existentes</h3>
+<h3>Pagina de Ingreso de Usuarios</h3>
 
 <p>
 Ingrese su usuario y password para ingresar.
 </p>
 
 <form id="login_form"
- method="post" action="{% url sicfi.usuarios.views.login %}">
-    <p>
-    {% csrf_token %}
-    {{ form.username.label_tag }} {{ form.username }}
-    <br/>
-    {{ form.password.label_tag }} {{ form.password }}
-    </p>
-    <p>
-    <input type="submit" value="Login to SICFI" id="login_submit_id" />
-    <input type="hidden" name="next" value="{{ next }}" />
-    </p>
+ method="post" action=".">
+ 	  {% csrf_token %}
+    <table class="ingresar_info">
+        <tr>
+        	<td class="etiquetas"><label>Usuario:</label></td>
+ 			<td> {{ form.username }} </td>
+		</tr>
+		<tr>
+			<td class="etiquetas"><label>Password:</label></td>
+			<td> {{ form.password }}</td>
+		</tr>
+	</table>
+	<input type="hidden" name="next" value="/" />
+	<input type="submit" value="Ingresar" />
 </form>
 
 <p>

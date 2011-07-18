@@ -15,8 +15,6 @@ def listar_clientes(request):
         context_instance=RequestContext(request)
     )
 
-
-
 def view_cliente_natural(request, cliente_id=None):
     if request.method == 'POST':
         if 'tipo' in request.POST:

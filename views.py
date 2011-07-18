@@ -5,11 +5,12 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 def index(request):
+    print request.user
     if request.user.is_authenticated():
         template = 'home.html'
         data = {}
     else:
-        template = 'index.html'
+        template = 'registration/login.html'
         data = { 'form' : AuthenticationForm(request) }
     return render_to_response(
         template,

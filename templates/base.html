@@ -40,11 +40,15 @@
     <div class="container" id="container_top">
       <div class="span-24 last" id="container_main">
         <div class="span-24 last" id="header">
-          <a href="/"><img src="{{ MEDIA_URL }}images/sicfi.gif" id="logo"></a>
+          <a href="/"><img src="{{ MEDIA_URL }}images/sicfi.jpg" id="logo"></a>
 
           <form action="/search" method="get">
             {% if user.is_authenticated %}
-              <span id="index_welcome">
+              <span id="index_welcome">{% if user.first_name or user.last_name %}
+                Bienvenido, {{ user.first_name|capfirst }} {{ user.last_name|capfirst }}
+                {% else %}
+                Bienvenido, {{ user.username|capfirst }}
+                {% endif %}
               </span> |
               <a href="/logout/">Salir</a>
             {% else %}

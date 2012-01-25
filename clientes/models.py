@@ -1,7 +1,7 @@
 from django.db import models
+from sicfi.smart_selects.db_fields import ChainedForeignKey
 from sicfi.catalogos.models import Tipo_Cliente, Tipo_Documento, Tipo_Direccion, Pais, Departamento, Municipio, Tipo_Telefono
 
-# Create your models here.
 class Cliente(models.Model):
     primer_nombre = models.CharField(max_length = 64)
     segundo_nombre = models.CharField(max_length = 64)
@@ -26,7 +26,10 @@ class Cliente(models.Model):
         return self.get_nombre()
 
     def get_absolute_url(self):
-        return "/clientes/cliente/%i" % self.id
+        if self.tipo_cliente.id == 1:
+            return "/clientes/cliente_natural/%i" % self.id
+        else:
+            return "/clientes/cliente_juridico/%i" % self.id
 
 
 
@@ -35,8 +38,20 @@ class Direccion(models.Model):
     cliente = models.ForeignKey(Cliente)
     tipo_direccion = models.ForeignKey(Tipo_Direccion)
     pais = models.ForeignKey(Pais)
-    departamento = models.ForeignKey(Departamento)
-    Municipio = models.ForeignKey(Municipio)
+    departamento = ChainedForeignKey(
+        Departamento,
+        chained_field="pais",
+        chained_model_field="pais",
+        show_all=False,
+        auto_choose=True
+    )
+    municipio = ChainedForeignKey(
+        Municipio,
+        chained_field="departamento",
+        chained_model_field="departamento",
+        show_all=False,
+        auto_choose=True
+    )
 
     def __unicode__(self):
         return u'%s' % (self.direccion)

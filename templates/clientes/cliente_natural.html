@@ -5,13 +5,9 @@
 {% block body %}
   {% if mensaje_error %}
     <h3><b>{{ mensaje_error }}</b></h3>
-	{% if cliente_form.errors %}
-		<h4><b>{{ cliente_form.errors }}</b></h4>
-	{% endif %}
   {% endif %}
   <form method="post" action="{% url sicfi.clientes.views.view_cliente_natural %}">
   <fieldset class="module aligned ">
-
 	{% for field in cliente_form %}
 	    <div class="form-row">
 	            <div class="field-box">

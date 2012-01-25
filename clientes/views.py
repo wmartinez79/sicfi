@@ -5,6 +5,9 @@ from django.forms.models import inlineformset_factory
 from sicfi.clientes.models import Cliente, Direccion, Telefono
 from sicfi.clientes.forms import ClienteNaturalForm, ClienteJuridicoForm
 from sicfi.catalogos.models import Tipo_Cliente
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def listar_clientes(request):
     clientes = Cliente.objects.all().order_by('id')
 
@@ -15,6 +18,7 @@ def listar_clientes(request):
         context_instance=RequestContext(request)
     )
 
+@login_required
 def view_cliente_natural(request, cliente_id=None):
     if request.method == 'POST':
         if 'tipo' in request.POST:

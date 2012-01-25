@@ -9,8 +9,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-     ('William Martinez', 'wdmartinez79@gmail.com'),
-     ('Rafael Marquez', 'rmarquezc2005@gmail.com')
+     ('William Martinez', 'wdmartinez79@gmail.com')
 )
 
 MANAGERS = ADMINS
@@ -115,7 +114,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
-
+LOGIN_URL ='/usuarios/login/'
 ROOT_URLCONF = 'sicfi.urls'
 
 TEMPLATE_DIRS = (
@@ -125,12 +124,12 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, "templates")
 )
 
-TEMPLATE_CONTEXT_PROCESSORS=("django.core.context_processors.auth",
+TEMPLATE_CONTEXT_PROCESSORS=("django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.request",
-    "django.core.context_processors.auth",
+    "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.request",
     )
 

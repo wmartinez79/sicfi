@@ -20,7 +20,7 @@ Ingrese su usuario y password para ingresar.
 </p>
 
 <form id="login_form"
- method="post" action=".">
+ method="post" action="{% url sicfi.usuarios.views.login_view %}">
  	  {% csrf_token %}
     <table class="ingresar_info">
         <tr>
@@ -32,8 +32,8 @@ Ingrese su usuario y password para ingresar.
 			<td> {{ form.password }}</td>
 		</tr>
 	</table>
+	<input type="submit" value="Ingresar" id="login_submit_id"/>
 	<input type="hidden" name="next" value="/" />
-	<input type="submit" value="Ingresar" />
 </form>
 
 <p>

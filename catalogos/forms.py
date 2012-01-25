@@ -29,13 +29,14 @@ class DepartamentoForm(ModelForm):
             model = Departamento
 
 class MunicipioForm(ModelForm):
-    nombre = forms.CharField(error_messages={'required':'Este campo es requerido'})
-    pais = forms.ModelChoiceField(queryset=Pais.objects.all(),error_messages={'required':'Este campo es requerido'})
-    departamento = forms.ModelChoiceField(queryset=Departamento.objects.all(),error_messages={'required':'Este campo es requerido'})
-    estado = forms.ModelChoiceField(queryset=Estado.objects.all(),error_messages={'required':'Este campo es requerido'})
-
     class Meta:
             model = Municipio
+
+    def clean(self):
+      print self.cleaned_data.get('nombre')
+      if self.cleaned_data.get('nombre') == None or self.cleaned_data.get('nombre') == "":
+         raise forms.ValidationError('No se ha indicado el nombre del Municipio')
+      return self.cleaned_data
 
 class TipoDocumentoForm(ModelForm):
     descripcion = forms.CharField(error_messages={'required':'Este campo es requerido'})

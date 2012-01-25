@@ -1,5 +1,6 @@
 from django.db import models
 from sicfi.smart_selects.db_fields import ChainedForeignKey
+from django.utils.translation import gettext_lazy as _
 
 
 class Estado(models.Model):
@@ -22,6 +23,9 @@ class Tipo_Cliente(models.Model):
     def get_absolute_url(self):
         return "/catalogos/tcliente/%i" % self.id
 
+    class Meta:
+        verbose_name = _('tipo de cliente')
+        verbose_name_plural = _('tipos de cliente')
 
 class Pais(models.Model):
     nombre = models.CharField(max_length = 64)
@@ -32,6 +36,10 @@ class Pais(models.Model):
 
     def get_absolute_url(self):
         return "/catalogos/pais/%i" % self.id
+
+    class Meta:
+        verbose_name_plural = _('paises')
+
 
 
 class Departamento(models.Model):
@@ -73,6 +81,10 @@ class Tipo_Documento(models.Model):
     def get_absolute_url(self):
         return "/catalogos/tdocumento/%i" % self.id
 
+    class Meta:
+        verbose_name = _('tipo de documento')
+        verbose_name_plural = _('tipos de documento')
+
 class Tipo_Direccion(models.Model):
     descripcion = models.CharField(max_length = 64)
     estado = models.ForeignKey(Estado)
@@ -83,6 +95,10 @@ class Tipo_Direccion(models.Model):
     def get_absolute_url(self):
         return "/catalogos/tdireccion/%i" % self.id
 
+    class Meta:
+        verbose_name = _('tipo de direccion')
+        verbose_name_plural = _('tipos de direccion')
+
 class Tipo_Telefono(models.Model):
     descripcion = models.CharField(max_length = 64)
     estado = models.ForeignKey(Estado)
@@ -92,3 +108,7 @@ class Tipo_Telefono(models.Model):
 
     def get_absolute_url(self):
         return "/catalogos/ttelefono/%i" % self.id
+
+    class Meta:
+        verbose_name = _('tipo de telefono')
+        verbose_name_plural = _('tipos de telefono')

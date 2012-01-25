@@ -1,0 +1,14 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block form_top %}
+  {% if not is_popup %}
+    <p>{% trans "Primero, por favor ingrese un nombre de usuario y password, luego podra ingresar más opciones." %}</p>
+  {% else %}
+    <p>{% trans "Ingrese un nombre de usuario y password." %}</p>
+  {% endif %}
+{% endblock %}
+
+{% block after_field_sets %}
+<script type="text/javascript">document.getElementById("id_username").focus();</script>
+{% endblock %}

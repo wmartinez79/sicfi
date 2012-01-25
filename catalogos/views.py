@@ -2,7 +2,9 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, HttpResponseRedirect
 from sicfi.catalogos.models import Estado, Tipo_Cliente, Pais, Departamento, Municipio, Tipo_Documento, Tipo_Direccion, Tipo_Telefono
 from sicfi.catalogos.forms import EstadoForm, TipoClienteForm, PaisForm, DepartamentoForm, MunicipioForm, TipoDocumentoForm, TipoDireccionForm, TipoTelefonoForm
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def listar_estados(request):
     estados = Estado.objects.all().order_by('id')
     estado_form = EstadoForm()
@@ -15,6 +17,7 @@ def listar_estados(request):
         context_instance=RequestContext(request)
     )
 
+@login_required
 def view_estado(request,id):
     estados = Estado.objects.all().order_by('id')
     status = get_object_or_404(Estado, pk = id)
@@ -29,6 +32,7 @@ def view_estado(request,id):
         context_instance=RequestContext(request)
     )
 
+@login_required
 def guardar_estado(request):
     estados = Estado.objects.all().order_by('id')
 
@@ -61,6 +65,7 @@ def guardar_estado(request):
             context_instance=RequestContext(request)
         )
 
+@login_required
 def delete_estado(request):
     estados = Estado.objects.all().order_by('id')
     estado_form = EstadoForm(request.POST)
@@ -82,6 +87,7 @@ def delete_estado(request):
             context_instance=RequestContext(request)
         )
 
+@login_required
 def listar_tcliente(request):
     tclientes = Tipo_Cliente.objects.all().order_by('id')
     print tclientes
@@ -95,6 +101,7 @@ def listar_tcliente(request):
         context_instance=RequestContext(request)
     )
 
+@login_required
 def view_tcliente(request,id):
     tclientes = Tipo_Cliente.objects.all().order_by('id')
     tclient = get_object_or_404(Tipo_Cliente, pk = id)
@@ -109,6 +116,7 @@ def view_tcliente(request,id):
         context_instance=RequestContext(request)
     )
 
+@login_required
 def guardar_tcliente(request):
     tclientes = Tipo_Cliente.objects.all().order_by('id')
 
@@ -141,6 +149,7 @@ def guardar_tcliente(request):
             context_instance=RequestContext(request)
         )
 
+@login_required
 def delete_tcliente(request):
     tclientes = Tipo_Cliente.objects.all().order_by('id')
     tcliente_form = TipoClienteForm(request.POST)
@@ -162,6 +171,7 @@ def delete_tcliente(request):
             context_instance=RequestContext(request)
         )
 
+@login_required
 def listar_paises(request):
     paises = Pais.objects.all().order_by('id')
     print paises
@@ -175,6 +185,7 @@ def listar_paises(request):
         context_instance=RequestContext(request)
     )
 
+@login_required
 def view_pais(request,id):
     paises = Pais.objects.all().order_by('id')
     p = get_object_or_404(Pais, pk = id)
@@ -189,6 +200,7 @@ def view_pais(request,id):
         context_instance=RequestContext(request)
     )
 
+@login_required
 def guardar_pais(request):
     paises = Pais.objects.all().order_by('id')
 
@@ -221,6 +233,7 @@ def guardar_pais(request):
             context_instance=RequestContext(request)
         )
 
+@login_required
 def delete_pais(request):
     paises = Pais.objects.all().order_by('id')
     pais_form = PaisForm(request.POST)
@@ -242,6 +255,7 @@ def delete_pais(request):
             context_instance=RequestContext(request)
         )
 
+@login_required
 def listar_departamentos(request):
     departamentos = Departamento.objects.all().order_by('id')
     departamento_form = DepartamentoForm()
@@ -254,7 +268,7 @@ def listar_departamentos(request):
         context_instance=RequestContext(request)
     )
 
-
+@login_required
 def view_departamento(request,id):
     departamentos = Departamento.objects.all().order_by('id')
     depa = get_object_or_404(Departamento, pk = id)
@@ -269,7 +283,7 @@ def view_departamento(request,id):
         context_instance=RequestContext(request)
     )
 
-
+@login_required
 def guardar_departamento(request):
     departamentos = Departamento.objects.all().order_by('id')
 
@@ -302,6 +316,7 @@ def guardar_departamento(request):
             context_instance=RequestContext(request)
         )
 
+@login_required
 def delete_departamento(request):
     departamentos = Departamento.objects.all().order_by('id')
     departamento_form = DepartamentoForm(request.POST)
@@ -323,6 +338,7 @@ def delete_departamento(request):
             context_instance=RequestContext(request)
         )
 
+@login_required
 def listar_municipios(request):
     municipios = Municipio.objects.all().order_by('id')
     municipio_form = MunicipioForm()
@@ -335,6 +351,7 @@ def listar_municipios(request):
         context_instance=RequestContext(request)
     )
 
+@login_required
 def view_municipio(request,id):
     municipios = Municipio.objects.all().order_by('id')
     muni = get_object_or_404(Municipio, pk = id)
@@ -349,6 +366,7 @@ def view_municipio(request,id):
         context_instance=RequestContext(request)
     )
 
+@login_required
 def guardar_municipio(request):
     municipios = Municipio.objects.all().order_by('id')
 
@@ -381,6 +399,7 @@ def guardar_municipio(request):
             context_instance=RequestContext(request)
         )
 
+@login_required
 def delete_municipio(request):
     municipios = Municipio.objects.all().order_by('id')
     municipio_form = MunicipioForm(request.POST)
@@ -402,6 +421,7 @@ def delete_municipio(request):
             context_instance=RequestContext(request)
         )
 
+@login_required
 def listar_tdocumento(request):
     tdocumentos = Tipo_Documento.objects.all().order_by('id')
     print tdocumentos
@@ -415,6 +435,7 @@ def listar_tdocumento(request):
         context_instance=RequestContext(request)
     )
 
+@login_required
 def view_tdocumento(request,id):
     tdocumentos = Tipo_Documento.objects.all().order_by('id')
     tdocumento = get_object_or_404(Tipo_Documento, pk = id)
@@ -429,6 +450,7 @@ def view_tdocumento(request,id):
         context_instance=RequestContext(request)
     )
 
+@login_required
 def guardar_tdocumento(request):
     tdocumentos = Tipo_Documento.objects.all().order_by('id')
 
@@ -461,6 +483,7 @@ def guardar_tdocumento(request):
             context_instance=RequestContext(request)
         )
 
+@login_required
 def delete_tdocumento(request):
     tdocumentos = Tipo_Documento.objects.all().order_by('id')
     tdocumento_form = TipoDocumentoForm(request.POST)
@@ -482,6 +505,7 @@ def delete_tdocumento(request):
             context_instance=RequestContext(request)
         )
 
+@login_required
 def listar_tdireccion(request):
     tdirecciones = Tipo_Direccion.objects.all().order_by('id')
     print tdirecciones
@@ -495,6 +519,7 @@ def listar_tdireccion(request):
         context_instance=RequestContext(request)
     )
 
+@login_required
 def view_tdireccion(request,id):
     tdirecciones = Tipo_Direccion.objects.all().order_by('id')
     tdireccion = get_object_or_404(Tipo_Direccion, pk = id)
@@ -509,6 +534,7 @@ def view_tdireccion(request,id):
         context_instance=RequestContext(request)
     )
 
+@login_required
 def guardar_tdireccion(request):
     tdirecciones = Tipo_Direccion.objects.all().order_by('id')
 
@@ -541,6 +567,7 @@ def guardar_tdireccion(request):
             context_instance=RequestContext(request)
         )
 
+@login_required
 def delete_tdireccion(request):
     tdirecciones = Tipo_Direccion.objects.all().order_by('id')
     tdireccion_form = TipoDireccionForm(request.POST)
@@ -562,6 +589,7 @@ def delete_tdireccion(request):
             context_instance=RequestContext(request)
         )
 
+@login_required
 def listar_ttelefono(request):
     ttelefonos = Tipo_Telefono.objects.all().order_by('id')
     print ttelefonos
@@ -575,6 +603,7 @@ def listar_ttelefono(request):
         context_instance=RequestContext(request)
     )
 
+@login_required
 def view_ttelefono(request,id):
     ttelefonos = Tipo_Telefono.objects.all().order_by('id')
     ttelefono = get_object_or_404(Tipo_Telefono, pk = id)
@@ -589,6 +618,7 @@ def view_ttelefono(request,id):
         context_instance=RequestContext(request)
     )
 
+@login_required
 def guardar_ttelefono(request):
     ttelefonos = Tipo_Telefono.objects.all().order_by('id')
 
@@ -621,6 +651,7 @@ def guardar_ttelefono(request):
             context_instance=RequestContext(request)
         )
 
+@login_required
 def delete_ttelefono(request):
     ttelefonos = Tipo_Telefono.objects.all().order_by('id')
     ttelefono_form = TipoTelefonoForm(request.POST)
